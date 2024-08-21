@@ -1,9 +1,27 @@
 #include "main.h"
 
-/* Motor Groups declaration and initiali*/
+/* Motor Groups declaration and initialization */
 
-pros::MotorGroup left_motors({1, 2, 3}); 
-pros::MotorGroup right_motors({4, 5, 6}); 
+// left_motors represents the grouping of motors that are on the LEFT side of the drive-train
+/* Arguments:
+
+ * The first argument in left_motors represents the ports that each motor is connected to
+ * 	- in this case our motor ports will be negative, negativity in motor ports indicates that the motor should be spinning in a reversed direction
+ *	- with a positive port, motors spin clockwise at a positive input. with a negative port, motors spin counterclockwise at a positive input.
+
+ * The second argument represents the gearset of the motor.
+ *	- There are different types of gearsets: Red, Green, Blue, with 
+ *	- blue being the fastest at 600RPM, Red being the slowest at 100RPM, and Green being the middle range at 200RPM
+ 
+ */
+pros::MotorGroup left_motors({1, 2, 3}, pros::MotorGearset::blue); // Motor ports {1,2,3} at 600RPM (Blue gearset)
+
+// same logic from left_motors applies to right_motors, including arguments and motor gearsets.
+// right_motors represents the grouping of motors that are on the RIGHT side of the drive-train
+// positive motor ports because the motors should be spinning clockwise for the robot to move forward.
+pros::MotorGroup right_motors({4, 5, 6}, pros::MotorGearset::blue); // Motor ports {4,5,6} at 600RPM
+
+/* End of Motor Group declaration and initialization */
 
 
 /**
