@@ -34,7 +34,7 @@
  */
 #define PROS_USE_LITERALS
 
-#incslude "api.h"
+#include "api.h"
 #include "lemlib/api.hpp" // IWYU pragma: keep
 
 

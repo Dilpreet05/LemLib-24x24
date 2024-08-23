@@ -1,5 +1,6 @@
 #include "main.h"
 
+
 /* Motor Groups declaration and initialization */
 
 // left_motors represents the grouping of motors that are on the LEFT side of the drive-train
@@ -12,9 +13,9 @@
  * The second argument represents the gearset of the motor.
  *	- There are different types of gearsets: Red, Green, Blue, with 
  *	- blue being the fastest at 600RPM, Red being the slowest at 100RPM, and Green being the middle range at 200RPM
- 
+
  */
-pros::MotorGroup left_motors({1, 2, 3}, pros::MotorGearset::blue); // Motor ports {1,2,3} at 600RPM (Blue gearset)
+pros::MotorGroup left_motors({-1, -2, -3}, pros::MotorGearset::blue); // Motor ports {1,2,3} at 600RPM (Blue gearset)
 
 // same logic from left_motors applies to right_motors, including arguments and motor gearsets.
 // right_motors represents the grouping of motors that are on the RIGHT side of the drive-train
@@ -24,17 +25,59 @@ pros::MotorGroup right_motors({4, 5, 6}, pros::MotorGearset::blue); // Motor por
 /* End of Motor Group declaration and initialization */
 
 
+/* Start of Drive Train code */
+
+/**
+ * This block of code creates a drivetrain object,
+ * 
+ * This stores our left side motors, right side motors, our track width, wheel diameter, Drive RPM, and our horizontal drift value
+ *
+ * Track Width - the distance between the left side and right sides of the drivetrain. 
+ *				 Specifically, from the middle of the wheels.
+ *
+ * Wheel diameter - The diameter of our drive train wheels. We measured using calipers.
+ *
+ * Drive RPM - The speed our wheels will spin at, this value is different from the Motor RPM because we're using a gear ratio,
+ *			   Our drive train gearings consists of a 36t Gear input and a 48t output, this comes out to be a 3/4 ratio or 0.75,
+ *			   We take this 0.75 value and multiply it by our motor RPM to find our drivetrain/wheel RPM,
+ *			   Our robot uses a 600RPM motor with a 0.75 gear ratio, making our drivetrain RPM become 450RPM.
+ *
+ * Horizontal Drift -  A feature that ensures compatibility with mutliple types of drivetrains , 
+ *					   with both all omni wheels (drift drive), or drivetrains with center traction wheels.
+ *					   It controls how fast the chassis can move while turning, a higher value means 
+ *					   The robot has less physical drift when driving and turning in auton and lower value means the opposite.
+ *					   We use our default value of 8 because we have center traction wheels which allows us to grip the field better.
+ *
+ */
+
+lemlib::Drivetrain drivetrain(&left_motors, // left motor group
+                              &right_motors, // right motor group
+                              11.5, // Track width: 11.5 INCHES
+                              2.75, // Wheel diameter of our 3D Printed custom Omni Wheels & VEX Traction wheels
+                              450, // drivetrain rpm: 450 RPM
+                              8 // horizontal drift: 8 
+);
+
+
+/*  End of Drive Train Code*/
+
+
+
+
+
+
+
 /**
  * Runs initialization code. This occurs as soon as the program is started.
  *
  * All other competition modes are blocked by initialize; it is recommended
  * to keep execution time for this mode under a few seconds.
  */
+
+
 void initialize() {
 	pros::lcd::initialize();
 	pros::lcd::set_text(1, "Hello PROS User!");
-
-	pros::lcd::register_btn1_cb(on_center_button);
 }
 
 /**
