@@ -55,7 +55,7 @@ pros::MotorGroup right_motors({4, 5, 6}, pros::MotorGearset::blue); // Motor por
 /**
  * ! This block of code creates a DRIVETRAIN object,
  * 
- *  
+ *? What does a drive train object do?
  ** This stores our left side motors, right side motors, our TRACKWIDTH, WHEELDIAMETER, 
  ** DRIVERPM, and our HORIZONTALDRIFT value 
  *
@@ -130,11 +130,11 @@ pros::Imu IMU(10);
 /**
  * 
  * HORIZONTALTRACKINGSENSOR:
- * ! tracks any movement in the horizontal direction of our robot, this is use a lot in the case where our auton paths stray
+ * ! sensor tracks any movement in the horizontal direction of our robot, this is use a lot in the case where our auton paths stray
  * ! due to horizontal contact from our or opposing alliance robots.
  * 
  * VERICALTRACKINGSENSOR:
- * ! tracks vertical movement/straight movements of the robot. 
+ * ! sensor tracks vertical movement/straight movements of the robot. 
  * ! This allows us to accurately move our robot a specific amount of units forward, as well as account for any contact.
  * 
  * 
@@ -143,12 +143,31 @@ pros::Rotation horizontalTrackingWheelSensor(12);
 pros::Rotation verticalTrackingWheelSensor(13);
 
 
-
+/**
+ * 
+ *! These lines of code bind the previously made horizontal and vertical TrackingWheelSensors into a new object that represents 
+ *! the tracking wheels.
+ * 
+ *! We will use these tracking wheels in order to physically track our robots movements, same explaination from sensors applies.
+ *
+ * 
+ */
 lemlib::TrackingWheel horizontalTrackingWheel(&horizontalTrackingWheelSensor,2.76,0);
 lemlib::TrackingWheel verticalTrackingWheel(&verticalTrackingWheelSensor,2.76,0);
 
 
 
+
+/**
+ * 
+ * SENSORS:
+ * ! an amalgamation of all our sensors, makes our sensors easily accessable by going through the "sensors" object.
+ * ! contains our verticalTrackingWheel, horizontalTrackingWheel, and our IMU.
+ * 
+ * ! additional arguments are verticalTrackingWheel2 and horizontalTrackingWheel2, we decided against using multiple tracking wheels
+ * ! for redundency and ease of code.
+ * 
+ */
 lemlib::OdomSensors sensors(&verticalTrackingWheel, // vertical tracking wheel 1, set to null
                             nullptr, // vertical tracking wheel 2, set to nullptr as we are using IMEs
                             &horizontalTrackingWheel, // horizontal tracking wheel 1
@@ -160,7 +179,22 @@ lemlib::OdomSensors sensors(&verticalTrackingWheel, // vertical tracking wheel 1
 
 /* Start of PID Code */
 
-// lateral PID controller
+/**
+ * 
+ *! This is our lateral PID controller.
+ * 
+ * PID:
+ *? What is a PID?
+ ** A PID is a controller. It controls a mechanism. It takes a numerical input, and returns a numerical output. 
+ ** The numerical input is a measurement from a sensor, and the numerical output is the power for an actuator (e.g a motor).
+ *
+ *? Why do we use PID?
+ ** It allows us to have more consistant autonomous routines,
+ ** as well as improving how our robots travel in autonomous when put under high load.
+ *
+ * 
+ * 
+ */
 lemlib::ControllerSettings lateralController (10, // proportional gain (kP)
                                               0, // integral gain (kI)
                                               3, // derivative gain (kD)
@@ -204,7 +238,7 @@ lemlib::Chassis chassis(DRIVETRAIN, // drivetrain settings
 
 // placeholder motor ports.
 pros::Motor flexWheelIntakeMotor(10,pros::MotorGearset::green,pros::v5::MotorUnits::degrees);
-pros::Motor hookIntakeMotor(11,pros::MotorGearset::green,pros::v5::MotorUnits::degrees);
+pros::Motor hookIntakeMotor(-11,pros::MotorGearset::green,pros::v5::MotorUnits::degrees);
 
 
 
