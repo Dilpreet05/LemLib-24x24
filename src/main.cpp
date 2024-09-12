@@ -6,7 +6,6 @@
 #include "pros/misc.hpp"
 #include "pros/rotation.hpp"
 
-pros::Controller master(pros::E_CONTROLLER_MASTER);
 
 /* Motor Groups declaration and initialization */
 
@@ -179,7 +178,9 @@ lemlib::OdomSensors sensors(&verticalTrackingWheel,   // vertical tracking wheel
  ** It allows us to have more consistent autonomous routines,
  ** as well as improving how our robots travel in autonomous when put under high load.
  *
- *
+ *? What is a laterial PID controller used for? 
+ ** We use this lateral contoroller in order to ensure that our forwards and backwards movements are consistant, smooth, and fast. 
+ ** Our lateral controller allows us to gain these improvements and gives us a leg up on the competition.
  *
  */
 
@@ -195,6 +196,15 @@ lemlib::ControllerSettings lateralController(10,  // proportional gain (kP)
                                              20   // maximum acceleration (slew)
 );
 
+/**
+ * 
+ *! This is our angular PID controller.
+ * 
+ *? What is a angular PID controller used for?
+ ** We use an angular PID controller to ensure correct turning radius and consitancy. 
+ ** Having these levels of consistancy in both our lateral and angular movements allows us to have well function autonomous rutines.
+ * 
+ */
 // angular PID controller
 lemlib::ControllerSettings angularController(2,   // proportional gain (kP)
                                              0,   // integral gain (kI)
@@ -209,7 +219,17 @@ lemlib::ControllerSettings angularController(2,   // proportional gain (kP)
 
 /* End of PID Code */
 
+
+
 /* Start of chassis */
+
+/**
+ * 
+ * CHASSIS: 
+ *! This is the amalgomation of our last 4 blocks of code. We combine our drivetrain, lateralController, angularController, and sensors.
+ *! This sort of acts as a container for us that allows us to access all of these areas of code without having to memorize all these names. 
+ *! This is also what we will be calling when using any autonomous rutines or drive controlls.
+ */
 
 lemlib::Chassis chassis(DRIVETRAIN,        // drivetrain settings
                         lateralController, // lateral PID settings
@@ -219,48 +239,9 @@ lemlib::Chassis chassis(DRIVETRAIN,        // drivetrain settings
 
 /* End of Chassis */
 
-/* Start of Intake Code */
 
-// placeholder motor ports.
-pros::Motor flexWheelIntakeMotor(-10, pros::MotorGearset::green, pros::v5::MotorUnits::degrees);
-pros::Motor hookIntakeMotor(-11, pros::MotorGearset::green, pros::v5::MotorUnits::degrees);
 
-void intakeControl()
-{
 
-    if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L1))
-    { // Move wheel intake while holding L1
-        flexWheelIntakeMotor.move(127);
-    }
-    else
-    { // Stop wheel intake otherwise
-        flexWheelIntakeMotor.move(0);
-        flexWheelIntakeMotor.brake();
-    }
-
-    if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R1))
-    { // Move hook intake while holding R1
-        hookIntakeMotor.move(127);
-    }
-    else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R2))
-    { // Move hook intake the other way while holding L2
-        hookIntakeMotor.move(-127);
-    }
-    else
-    { // Stop otherwise
-        hookIntakeMotor.move(0);
-        hookIntakeMotor.brake();
-    }
-}
-
-void setIntakeBrakes()
-{ // Set the intake motors to break with coast
-
-    flexWheelIntakeMotor.set_brake_mode(pros::MotorBrake::coast);
-    hookIntakeMotor.set_brake_mode(pros::MotorBrake::coast);
-}
-
-/* End of Intake Code */
 
 /**
  * Runs initialization code. This occurs as soon as the program is started.

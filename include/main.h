@@ -37,6 +37,8 @@
 #include "api.h"
 #include "lemlib/api.hpp" // IWYU pragma: keep
 
+#include "SubsystemHeaders/intake.hpp"
+#include "SubsystemHeaders/misc.hpp"
 
 /**
  * You should add more #includes here
