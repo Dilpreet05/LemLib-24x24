@@ -6,16 +6,21 @@
 // #include "asset.h"
 
 ASSET(hot_chip_gif)
+ASSET(chip_gif)
+ASSET(spongebob_gif)
 
 
 void initialize()
 {
-    // pros::lcd::initialize(); // initialize brain screen
+    pros::lcd::initialize(); // initialize brain screen
     // pros::lcd::clear();
 
+    // gif = new Gif(chip_gif,lv_scr_act());
 
     // pros::delay(2000);
     chassis.calibrate();     // calibrate sensors
+    setBrakes();
+
     // pros::Task gifTask([&](){
     
     //     gif = new Gif(hot_chip_gif,lv_scr_act());
@@ -97,12 +102,10 @@ void autonomous() {
  ** task, not resume it from where it left off.
  */
 
-ASSET(chip_gif)
 
 void opcontrol()
 {
 
-    gif = new Gif(chip_gif,lv_scr_act());
 
     while (true)
     {

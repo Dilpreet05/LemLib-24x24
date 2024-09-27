@@ -41,6 +41,7 @@
 #include "SubsystemHeaders/intake.hpp"
 #include "SubsystemHeaders/misc.hpp"
 #include "SubsystemHeaders/chassis.hpp"
+#include "SubsystemHeaders/stake_mech.hpp"
 
 /**
  * You should add more #includes here

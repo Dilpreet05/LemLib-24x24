@@ -3,3 +3,5 @@
 
 extern Gif* gif;
 extern pros::Controller master;
+
+void setBrakes();
