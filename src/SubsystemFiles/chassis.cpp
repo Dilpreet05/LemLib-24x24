@@ -28,14 +28,16 @@
  *	- blue being the fastest at 600RPM, Red being the slowest at 100RPM, and Green being the middle range at 200RPM
 
  */
-pros::MotorGroup leftMotors({-8, -9, 10}, pros::MotorGearset::blue); // Motor ports {8,9,10} at 600RPM (Blue gearset)
+
+pros::MotorGroup leftMotors({-4, -3, -2}, pros::MotorGearset::blue); // Motor ports {4,3,2} at 600RPM
 
 /**
  ** Same logic from leftMotors applies to rightMotors, including arguments and motor gearsets.
  ** rightMotors represents the grouping of motors that are on the RIGHT side of the DRIVETRAIN
  ** Positive motor ports because the motors should be spinning clockwise for the robot to move forward.
  */
-pros::MotorGroup rightMotors({4, 3, -2}, pros::MotorGearset::blue); // Motor ports {4,3,2} at 600RPM
+pros::MotorGroup rightMotors({8, 9, 10}, pros::MotorGearset::blue); // Motor ports {8,9,10} at 600RPM (Blue gearset)
+
 
 /* End of Motor Group declaration and initialization */
 
