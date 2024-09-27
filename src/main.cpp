@@ -1,6 +1,7 @@
 #include "main.h"
 #include "liblvgl/llemu.hpp"
 #include "liblvgl/lvgl.h"
+#include "liblvgl/llemu.h"
 
 // #include "asset.h"
 
@@ -9,9 +10,9 @@ ASSET(hot_chip_gif)
 
 void initialize()
 {
-    pros::lcd::initialize(); // initialize brain screen
+    // pros::lcd::initialize(); // initialize brain screen
     // pros::lcd::clear();
-    
+
 
     // pros::delay(2000);
     chassis.calibrate();     // calibrate sensors
@@ -96,10 +97,12 @@ void autonomous() {
  ** task, not resume it from where it left off.
  */
 
+ASSET(chip_gif)
+
 void opcontrol()
 {
 
-    gif = new Gif(hot_chip_gif,lv_scr_act());
+    gif = new Gif(chip_gif,lv_scr_act());
 
     while (true)
     {
