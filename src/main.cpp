@@ -9,7 +9,6 @@ ASSET(hot_chip_gif)
 ASSET(chip_gif)
 ASSET(spongebob_gif)
 
-
 void initialize()
 {
     pros::lcd::initialize(); // initialize brain screen
@@ -18,17 +17,14 @@ void initialize()
     // gif = new Gif(chip_gif,lv_scr_act());
 
     // pros::delay(2000);
-    chassis.calibrate();     // calibrate sensors
+    chassis.calibrate(); // calibrate sensors
     setBrakes();
 
     // pros::Task gifTask([&](){
-    
-    //     gif = new Gif(hot_chip_gif,lv_scr_act());
-    
-    
-    // });
 
-    
+    //     gif = new Gif(hot_chip_gif,lv_scr_act());
+
+    // });
 
     // print position to brain screen
 
@@ -42,22 +38,18 @@ void initialize()
     //         // delay to save resources
     //         pros::delay(20);
     //     } });
-
-
 }
-
 
 /**
  ** Runs while the robot is in the disabled state of Field Management System or
  ** the VEX Competition Switch, following either autonomous or opcontrol. When
  ** the robot is enabled, this task will exit.
  */
-void disabled() {
+void disabled()
+{
 
     // This displays a funny gif on our brain while our robot is in the disabled state.
-    // psychlogical warefare against our opposing teams.
-
-
+    // psychlogical warfare against our opposing teams.
 }
 
 /**
@@ -82,10 +74,10 @@ void competition_initialize() {}
  ** will be stopped. Re-enabling the robot will restart the task, not re-start it
  ** from where it left off.
  */
-void autonomous() {
+void autonomous()
+{
 
     // pros::lcd::clear();
-
 }
 
 /**
@@ -102,10 +94,8 @@ void autonomous() {
  ** task, not resume it from where it left off.
  */
 
-
 void opcontrol()
 {
-
 
     while (true)
     {

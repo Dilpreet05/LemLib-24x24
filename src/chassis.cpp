@@ -28,14 +28,14 @@
  *	- blue being the fastest at 600RPM, Red being the slowest at 100RPM, and Green being the middle range at 200RPM
 
  */
-pros::MotorGroup leftMotors({-1, -2, -3}, pros::MotorGearset::blue); // Motor ports {1,2,3} at 600RPM (Blue gearset)
+pros::MotorGroup leftMotors({-8, -9, 10}, pros::MotorGearset::blue); // Motor ports {8,9,10} at 600RPM (Blue gearset)
 
 /**
  ** Same logic from leftMotors applies to rightMotors, including arguments and motor gearsets.
  ** rightMotors represents the grouping of motors that are on the RIGHT side of the DRIVETRAIN
  ** Positive motor ports because the motors should be spinning clockwise for the robot to move forward.
  */
-pros::MotorGroup rightMotors({4, 5, 6}, pros::MotorGearset::blue); // Motor ports {4,5,6} at 600RPM
+pros::MotorGroup rightMotors({4, 3, -2}, pros::MotorGearset::blue); // Motor ports {4,3,2} at 600RPM
 
 /* End of Motor Group declaration and initialization */
 
@@ -67,7 +67,7 @@ pros::MotorGroup rightMotors({4, 5, 6}, pros::MotorGearset::blue); // Motor port
  * ! It controls how fast the chassis can move while turning, a higher value means,
  * ! The robot has less physical drift when driving and turning in auton and lower value means the opposite.
  * ! We use our default value of 8 because we have center traction wheels which allow us to grip the field more proper.
- * 
+ *
  *
  */
 
@@ -171,8 +171,8 @@ lemlib::OdomSensors sensors(&verticalTrackingWheel,   // vertical tracking wheel
  ** It allows us to have more consistent autonomous routines,
  ** as well as improving how our robots travel in autonomous when put under high load.
  *
- *? What is a laterial PID controller used for? 
- ** We use this lateral contoroller in order to ensure that our forwards and backwards movements are consistant, smooth, and fast. 
+ *? What is a laterial PID controller used for?
+ ** We use this lateral contoroller in order to ensure that our forwards and backwards movements are consistant, smooth, and fast.
  ** Our lateral controller allows us to gain these improvements and gives us a leg up on the competition.
  *
  */
@@ -190,13 +190,13 @@ lemlib::ControllerSettings lateralController(10,  // proportional gain (kP)
 );
 
 /**
- * 
+ *
  *! This is our angular PID controller.
- * 
+ *
  *? What is a angular PID controller used for?
- ** We use an angular PID controller to ensure correct turning radius and consitancy. 
+ ** We use an angular PID controller to ensure correct turning radius and consitancy.
  ** Having these levels of consistancy in both our lateral and angular movements allows us to have well function autonomous rutines.
- * 
+ *
  */
 // angular PID controller
 lemlib::ControllerSettings angularController(2,   // proportional gain (kP)
@@ -212,15 +212,13 @@ lemlib::ControllerSettings angularController(2,   // proportional gain (kP)
 
 /* End of PID Code */
 
-
-
 /* Start of chassis */
 
 /**
- * 
- * CHASSIS: 
+ *
+ * CHASSIS:
  *! This is the amalgomation of our last 4 blocks of code. We combine our drivetrain, lateralController, angularController, and sensors.
- *! This sort of acts as a container for us that allows us to access all of these areas of code without having to memorize all these names. 
+ *! This sort of acts as a container for us that allows us to access all of these areas of code without having to memorize all these names.
  *! This is also what we will be calling when using any autonomous rutines or drive controlls.
  */
 
@@ -232,14 +230,9 @@ lemlib::Chassis chassis(DRIVETRAIN,        // drivetrain settings
 
 /* End of Chassis */
 
-
-
-
-
 /**
  *! Runs initialization code. This occurs as soon as the program is started.
  *
  ** All other competition modes are blocked by initialize; it is recommended
  ** to keep execution time for this mode under a few seconds.
  */
-
