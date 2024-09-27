@@ -42,6 +42,7 @@
 #include "SubsystemHeaders/misc.hpp"
 #include "SubsystemHeaders/chassis.hpp"
 #include "SubsystemHeaders/stake_mech.hpp"
+#include "SubsystemHeaders/clamp.hpp"
 
 /**
  * You should add more #includes here
