@@ -4,8 +4,8 @@
 /* Start of Intake Code */
 
 // placeholder motor ports.
-pros::Motor flexWheelIntakeMotor(-10, pros::MotorGearset::green, pros::v5::MotorUnits::degrees);
-pros::Motor hookIntakeMotor(-11, pros::MotorGearset::green, pros::v5::MotorUnits::degrees);
+pros::Motor flexWheelIntakeMotor(20, pros::MotorGearset::green, pros::v5::MotorUnits::degrees);
+pros::Motor hookIntakeMotor(12, pros::MotorGearset::green, pros::v5::MotorUnits::degrees);
 
 void intakeControl()
 {

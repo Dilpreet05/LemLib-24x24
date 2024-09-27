@@ -4,9 +4,9 @@
 #include "pros/misc.h"
 #include <cstdint>
 
-pros::Motor stakeMotor(15,pros::MotorGearset::green,pros::MotorUnits::degrees);
-pros::adi::DigitalOut leftSide('A',LOW);
-pros::adi::DigitalOut rightSide('B',LOW);
+pros::Motor stakeMotor(11,pros::MotorGearset::green,pros::MotorUnits::degrees);
+pros::adi::DigitalOut leftSide('H',LOW);
+pros::adi::DigitalOut rightSide('G',LOW);
 int pistonState = 0;
 
 void moveStakeMech(){
