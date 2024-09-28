@@ -6,20 +6,24 @@
 pros::Motor flexWheelIntakeMotor(20, pros::MotorGearset::green, pros::v5::MotorUnits::degrees);
 pros::Motor hookIntakeMotor(12, pros::MotorGearset::green, pros::v5::MotorUnits::degrees);
 
+int fast_hook_intake_speed = 127;
+int slow_hook_intake_speed = 100;
+int hook_intake_speed = fast_hook_intake_speed;
+
 void intakeControl()
 {
-    // Move hook intake while holding R1
+    // Move hook intake while holding R2
     if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R2))
     {
-        hookIntakeMotor.move(127);
+        hookIntakeMotor.move(hook_intake_speed);
         flexWheelIntakeMotor.move(127);
     }
 
-    // Move hook intake the other way while holding R2
+    // Move hook intake the other way while holding R1
     else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R1))
     {
+        hookIntakeMotor.move(-hook_intake_speed);
         flexWheelIntakeMotor.move(-127);
-        hookIntakeMotor.move(-127);
     }
 
     // Stop otherwise
@@ -27,6 +31,12 @@ void intakeControl()
     {
         hookIntakeMotor.brake();
         flexWheelIntakeMotor.brake();
+    }
+
+    // Swap the hook intake speed
+    if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A))
+    {
+        hook_intake_speed = hook_intake_speed == fast_hook_intake_speed ? slow_hook_intake_speed : fast_hook_intake_speed;
     }
 }
 

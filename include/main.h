@@ -43,6 +43,7 @@
 #include "SubsystemHeaders/chassis.hpp"
 #include "SubsystemHeaders/stake_mech.hpp"
 #include "SubsystemHeaders/clamp.hpp"
+#include "SubsystemHeaders/stick.hpp"
 
 /**
  * You should add more #includes here

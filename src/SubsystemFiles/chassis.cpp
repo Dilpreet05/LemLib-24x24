@@ -38,7 +38,6 @@ pros::MotorGroup leftMotors({-4, -3, -2}, pros::MotorGearset::blue); // Motor po
  */
 pros::MotorGroup rightMotors({8, 9, 10}, pros::MotorGearset::blue); // Motor ports {8,9,10} at 600RPM (Blue gearset)
 
-
 /* End of Motor Group declaration and initialization */
 
 /* Start of DRIVETRAIN code */

@@ -5,3 +5,4 @@ extern Gif* gif;
 extern pros::Controller master;
 
 void setBrakes();
+void check_motors_and_get_temps();

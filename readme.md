@@ -21,18 +21,6 @@ Currently we use Pros and LemLib to program our robot. We considered using VOSS 
 (WIP)
 
 ### Controls
-
-| Buttons | Functions |
-| ------- | --------- |
-| L1        |           |
-|  |  |
-|  |  |
-|  |  |
-|  |  |
-|  |  |
-|  |  |
-|  |  |
-|  |  |
-|  |  |
+![alt text](controls.png)
 
 This repo uses https://github.com/theol0403/gif-pros/tree/master

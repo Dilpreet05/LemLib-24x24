@@ -103,5 +103,7 @@ void opcontrol()
         intakeControl();
         moveStakeMech();
         updateClamp();
+        stickControl();
+        check_motors_and_get_temps();
     }
 }

@@ -30,7 +30,7 @@ void moveStakeMech()
     }
 
     // Press DOWN to toggle the left and right pistons
-    if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_DOWN))
+    if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_LEFT))
     {
         pistonState = !pistonState;
         leftSide.set_value(pistonState);
