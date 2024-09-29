@@ -2,25 +2,26 @@
 #include "pros/adi.h"
 #include "pros/adi.hpp"
 #include "pros/misc.h"
-#include <cstdint>
 
 pros::Motor stakeMotor(11, pros::MotorGearset::green, pros::MotorUnits::degrees);
 pros::adi::DigitalOut leftSide('H', LOW);
 pros::adi::DigitalOut rightSide('G', LOW);
 bool pistonState = false;
 
+int speed = 127;
+
 void moveStakeMech()
 {
     // Move stake motor while holding y
     if (master.get_digital(pros::E_CONTROLLER_DIGITAL_Y))
     {
-        stakeMotor.move(-127);
+        stakeMotor.move(-speed);
     }
 
     // Move stake motor the other way while holding B
     else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_B))
     {
-        stakeMotor.move(127);
+        stakeMotor.move(speed);
     }
 
     // Stop otherwise
