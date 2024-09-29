@@ -2,7 +2,7 @@
 
 ### Description
 
-This program is the code for the AYO 15x15 robot in the 2024-2025 season of high stakes. The main branch is the branch that functions the best, any other branch is likely testing new features without ruining what we already have.
+This program is the code for the AYO 24x24 robot in the 2024-2025 season of high stakes. The main branch is the branch that functions the best, any other branch is likely testing new features without ruining what we already have.
 
 ### Software
 
