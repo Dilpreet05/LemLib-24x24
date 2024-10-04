@@ -36,7 +36,7 @@ pros::MotorGroup leftMotors({-4, -3, -2}, pros::MotorGearset::blue); // Motor po
  ** rightMotors represents the grouping of motors that are on the RIGHT side of the DRIVETRAIN
  ** Positive motor ports because the motors should be spinning clockwise for the robot to move forward.
  */
-pros::MotorGroup rightMotors({8, 9, 10}, pros::MotorGearset::blue); // Motor ports {8,9,10} at 600RPM (Blue gearset)
+pros::MotorGroup rightMotors({8, 7, 9}, pros::MotorGearset::blue); // Motor ports {8,9,10} at 600RPM (Blue gearset)
 
 /* End of Motor Group declaration and initialization */
 
@@ -109,7 +109,7 @@ lemlib::Drivetrain DRIVETRAIN(&leftMotors,  // left motor group
  *
  *
  */
-pros::Imu IMU(10);
+pros::Imu IMU(9);
 
 /**
  *
