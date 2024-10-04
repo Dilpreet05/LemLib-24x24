@@ -8,6 +8,7 @@
 ASSET(hot_chip_gif)
 ASSET(chip_gif)
 ASSET(spongebob_gif)
+ASSET(test_txt)
 
 void initialize()
 {
@@ -76,7 +77,9 @@ void competition_initialize() {}
  */
 void autonomous()
 {
-
+    chassis.setPose(0, 0, 0);
+    // chassis.follow(test_txt, 15, 2000);
+    chassis.moveToPose(0, 10, 0, 4000);
     // pros::lcd::clear();
 }
 
@@ -96,9 +99,10 @@ void autonomous()
 
 void opcontrol()
 {
-
+    int frame = 0;
     while (true)
     {
+        frame++;
         chassis.tank(master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y), master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y));
         intakeControl();
         moveStakeMech();

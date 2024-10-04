@@ -5,7 +5,7 @@
 // This file exists just so that we can have a global variables that dont belong to a subsystem.
 Gif *gif;
 pros::Controller master(pros::E_CONTROLLER_MASTER);
-
+pros::Optical ring_optic_sensor(15);
 // Helper function to set brakes on all subsystems
 void setBrakes()
 {
@@ -53,4 +53,10 @@ void check_motors_and_get_temps()
     double averageTempFahrenheit = averageTempCelsius * 9.0 / 5.0 + 32.0;
     //   print_to_screen("Avgerage Temp: " + std::to_string(averageTempFahrenheit), 4);
     pros::lcd::print(4, ("Average Temp: " + std::to_string(roundf(averageTempFahrenheit))).c_str());
+}
+
+bool ring_is_red()
+{
+    ring_optic_sensor.set_led_pwm(100);
+    return ring_optic_sensor.get_hue() < 15;
 }

@@ -123,8 +123,8 @@ pros::Imu IMU(9);
  *
  *
  */
-pros::Rotation horizontalTrackingWheelSensor(12);
-pros::Rotation verticalTrackingWheelSensor(13);
+pros::Rotation horizontalTrackingWheelSensor(6);
+pros::Rotation verticalTrackingWheelSensor(19);
 
 /**
  *

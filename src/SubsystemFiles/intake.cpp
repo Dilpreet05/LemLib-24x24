@@ -12,15 +12,15 @@ int hook_intake_speed = fast_hook_intake_speed;
 
 void intakeControl()
 {
-    // Move hook intake while holding R2
+    // Outtake while holding R2
     if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R2))
     {
         hookIntakeMotor.move(hook_intake_speed);
         flexWheelIntakeMotor.move(127);
     }
 
-    // Move hook intake the other way while holding R1
-    else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R1))
+    // Intake while holding R1 or if the ring is the desired color
+    else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R1) || ring_is_red())
     {
         hookIntakeMotor.move(-hook_intake_speed);
         flexWheelIntakeMotor.move(-127);
