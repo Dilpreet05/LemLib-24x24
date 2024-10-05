@@ -109,7 +109,7 @@ lemlib::Drivetrain DRIVETRAIN(&leftMotors,  // left motor group
  *
  *
  */
-pros::Imu IMU(9);
+pros::Imu IMU(13);
 
 /**
  *
@@ -179,15 +179,15 @@ lemlib::OdomSensors sensors(&verticalTrackingWheel,   // vertical tracking wheel
  */
 
 // lateral PID controller
-lemlib::ControllerSettings lateralController(10,  // proportional gain (kP)
+lemlib::ControllerSettings lateralController(3,  // proportional gain (kP)
                                              0,   // integral gain (kI)
-                                             3,   // derivative gain (kD)
+                                             5,   // derivative gain (kD)
                                              3,   // anti windup
                                              1,   // small error range, in inches
                                              100, // small error range timeout, in milliseconds
                                              3,   // large error range, in inches
                                              500, // large error range timeout, in milliseconds
-                                             20   // maximum acceleration (slew)
+                                             10   // maximum acceleration (slew)
 );
 
 /**
