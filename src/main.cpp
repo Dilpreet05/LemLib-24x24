@@ -1,13 +1,13 @@
 #include "main.h"
 #include "liblvgl/llemu.hpp"
-#include "liblvgl/lvgl.h"
-#include "liblvgl/llemu.h"
+#include "liblvgl/lvgl.h" // IWYU pragma: keep
+#include "liblvgl/llemu.h" // IWYU pragma: keep
 
 // #include "asset.h"
 
-ASSET(hot_chip_gif)
-ASSET(chip_gif)
-ASSET(spongebob_gif)
+// ASSET(hot_chip_gif)
+// ASSET(chip_gif)
+// ASSET(spongebob_gif)
 ASSET(test_txt)
 
 void initialize()

@@ -44,6 +44,7 @@
 #include "SubsystemHeaders/stake_mech.hpp"
 #include "SubsystemHeaders/clamp.hpp"
 #include "SubsystemHeaders/stick.hpp"
+#include "auton.hpp"
 
 /**
  * You should add more #includes here
