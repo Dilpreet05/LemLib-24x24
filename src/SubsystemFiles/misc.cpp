@@ -1,9 +1,9 @@
 #include "main.h"
-#include "gif-pros/gifclass.hpp"
+// #include "gif-pros/gifclass.hpp"
 // #include "asset.h" // IWYU pragma: keep
 
 // This file exists just so that we can have a global variables that dont belong to a subsystem.
-Gif *gif;
+// Gif *gif;
 pros::Controller master(pros::E_CONTROLLER_MASTER);
 pros::Optical ring_optic_sensor(15);
 // Helper function to set brakes on all subsystems

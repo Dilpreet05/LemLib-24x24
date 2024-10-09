@@ -21,24 +21,18 @@ void initialize()
     chassis.calibrate(); // calibrate sensors
     setBrakes();
 
-    // pros::Task gifTask([&](){
-
-    //     gif = new Gif(hot_chip_gif,lv_scr_act());
-
-    // });
-
     // print position to brain screen
 
-    // pros::Task screen_task([&]()
-    //                        {
-    //     while (true) {
-    //         // print robot location to the brain screen
-    //         pros::lcd::print(0, "X: %f", chassis.getPose().x); // x
-    //         pros::lcd::print(1, "Y: %f", chassis.getPose().y); // y
-    //         pros::lcd::print(2, "Theta: %f", chassis.getPose().theta); // heading
-    //         // delay to save resources
-    //         pros::delay(20);
-    //     } });
+    pros::Task screen_task([&]()
+                           {
+        while (true) {
+            // print robot location to the brain screen
+            pros::lcd::print(0, "X: %f", chassis.getPose().x); // x
+            pros::lcd::print(1, "Y: %f", chassis.getPose().y); // y
+            pros::lcd::print(2, "Theta: %f", chassis.getPose().theta); // heading
+            // delay to save resources
+            pros::delay(20);
+        } });
 }
 
 /**
@@ -77,11 +71,11 @@ void competition_initialize() {}
  */
 void autonomous()
 {
-    chassis.setPose(0, 0, 0);
-    chassis.follow(test_txt, 15, 20000);
-    chassis.waitUntilDone();
-    // chassis.moveToPoint(0, 24, 40000);
-    // pros::lcd::clear();
+
+
+    // tuneAngularPID();
+    tuneLinearPID();
+
 }
 
 /**
@@ -100,16 +94,18 @@ void autonomous()
 
 void opcontrol()
 {
-    int frame = 0;
     while (true)
     {
-        frame++;
         // chassis.tank(master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y), master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y));
         chassis.arcade(master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y), master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X));
         intakeControl();
         moveStakeMech();
         updateClamp();
         stickControl();
-        check_motors_and_get_temps();
+        // pros::lcd::print(0, "X: %f", chassis.getPose().x); // x
+        // pros::lcd::print(1, "Y: %f", chassis.getPose().y); // y
+        // pros::lcd::print(2, "Theta: %f", chassis.getPose().theta); // heading
+
+        // check_motors_and_get_temps();
     }
 }
