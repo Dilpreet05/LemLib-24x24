@@ -2,6 +2,7 @@
 #include "liblvgl/llemu.hpp"
 #include "liblvgl/lvgl.h" // IWYU pragma: keep
 #include "liblvgl/llemu.h" // IWYU pragma: keep
+#include "pros/motors.h"
 
 // #include "asset.h"
 
@@ -72,7 +73,7 @@ void competition_initialize() {}
 void autonomous()
 {
 
-
+    chassis.setBrakeMode(pros::E_MOTOR_BRAKE_HOLD);
     // tuneAngularPID();
     tuneLinearPID();
 
@@ -94,6 +95,9 @@ void autonomous()
 
 void opcontrol()
 {
+
+    chassis.setBrakeMode(pros::E_MOTOR_BRAKE_COAST);
+
     while (true)
     {
         // chassis.tank(master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y), master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y));
