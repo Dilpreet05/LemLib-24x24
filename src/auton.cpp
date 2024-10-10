@@ -1,5 +1,4 @@
 #include "main.h" // IWYU pragma: keep
-#include "pros/llemu.hpp"
 
 /* Tuning Functions */
 
@@ -33,8 +32,8 @@ void clampUp(){
 }
 
 void intake(){
-        hookIntakeMotor.move(-intakeSpeed);
-        flexWheelIntakeMotor.move(-127);
+    hookIntakeMotor.move(-intakeSpeed);
+    flexWheelIntakeMotor.move(-127);
 }
 
 void outtake(){

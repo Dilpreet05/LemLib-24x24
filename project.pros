@@ -1,7 +1,7 @@
 {
   "py/object": "pros.conductor.project.Project",
   "py/state": {
-    "project_name": "LemLib-24x24",
+    "project_name": "Jenna press this one",
     "target": "v5",
     "templates": {
       "LemLib": {
@@ -320,7 +320,8 @@
     "upload_options": {
       "icon": "pizza",
       "slot": 1,
-      "after": "screen"
+      "after": "screen",
+      "description": "Code for 24x24 Robot"
     },
     "use_early_access": false
   }
