@@ -1,3 +1,4 @@
+#include "lemlib/chassis/chassis.hpp"
 #include "main.h" // IWYU pragma: keep
 
 /* Tuning Functions */
@@ -57,6 +58,8 @@ void liftMove(int n){
     }else if(n=2){
         // score position AND position for AWP Ladder touch.
         stakeMotor.move_absolute(-300,127);
+    }else{
+        stakeMotor.move_absolute(-500, 80);
     }
 
 }
@@ -65,33 +68,48 @@ ASSET(path1_txt)
 
 void redRightSide(){
 
-    chassis.setPose(-61.696,-32.171,270);
+    chassis.setPose(-61.287,-11.054,270);
 
     chassis.moveToPoint(-32, -32.171, 1200,{.forwards=false,.maxSpeed=100},false);
 
     chassis.turnToPoint(-24,-24,500,{.forwards=false});
     liftMove(1);
 
-    chassis.moveToPoint(-18, -18, 700,{.forwards=false,.minSpeed=90});
+    chassis.moveToPoint(-18, -18, 1200,{.forwards=false,.minSpeed=90});
     chassis.waitUntil(10);
     clampDown();
 
-    chassis.moveToPoint(-24, -54, 1250,{.minSpeed=70});
-    intake();
+    // chassis.moveToPoint(-55, -11.054, 750,{.forwards=false});
 
-    pros::delay(2500);
+    // chassis.swingToPoint(-24, -24, DriveSide::RIGHT, 750,{.forwards=false});
+
+    // chassis.moveToPoint(-24, -24, 1500,{.forwards=false,.minSpeed=100});
+    // clampDown();
+
+    chassis.moveToPoint(-24, -54, 2000,{.minSpeed=70});
+    intake();
+    
+    chassis.moveToPoint(-24, -50, 500,{.forwards=false,.minSpeed=127},false);
+    chassis.moveToPoint(-24, -58, 500,{.forwards=false,.minSpeed=127},false);
+    chassis.moveToPoint(-24, -50, 500,{.forwards=false,.minSpeed=127},false);
+    chassis.moveToPoint(-24, -58, 500,{.forwards=false,.minSpeed=127},false);
+
+    pros::delay(1500);
     stopIntake();
 
-    chassis.moveToPoint(-38, -48, 1500,{.forwards=false,.minSpeed=100},false);
+    chassis.moveToPoint(-38, -48, 2000,{.forwards=false,.minSpeed=50},false);
     stopIntake();
     clampUp();
 
     // chassis.moveToPoint(-2,-48,2000,{.forwards=false,.minSpeed=120},false);
     // clampDown();
 
-    // chassis.moveToPose(-15, -15, 45,1500,{.lead=8},false);
-    // liftMove(3);
+    chassis.moveToPoint(-18, -18, 1500,{.minSpeed=20},false);
+    chassis.turnToPoint(-17, -17, 500);
 
+    stakeMotor.move(-100);
+    pros::delay(1000);
+    stakeMotor.brake();
 
 
 
