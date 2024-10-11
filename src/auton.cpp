@@ -71,7 +71,7 @@ void liftMove(int n)
     }
 }
 
-void intakeTask(void* parameter)
+void intakeTask(void *parameter)
 {
     // Spits out ring if its the wrong color
     // Otherwise it acts normally
@@ -123,3 +123,10 @@ void redRightSide()
     // liftMove(3);
 }
 
+void gauresh()
+{
+    chassis.setPose(-58.44, -44.16, 230);
+
+    liftMove(1);
+    chassis.moveToPoint(-20, -20, 1200, {.forwards = false, .maxSpeed = 100}, false);
+}
