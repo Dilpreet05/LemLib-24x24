@@ -2,7 +2,7 @@
 #include "liblvgl/llemu.hpp"
 #include "liblvgl/lvgl.h" // IWYU pragma: keep
 #include "liblvgl/llemu.h" // IWYU pragma: keep
-#include "pros/motors.h"
+#include "pros/misc.h"
 
 // #include "asset.h"
 
@@ -73,9 +73,9 @@ void competition_initialize() {}
 void autonomous()
 {
 
-    // chassis.setBrakeMode(pros::E_MOTOR_BRAKE_HOLD);
-    tuneAngularPID();
+    // tuneAngularPID();
     // tuneLinearPID();
+    redRightSide();
 
 }
 
@@ -96,16 +96,20 @@ void autonomous()
 void opcontrol()
 {
 
-    chassis.setBrakeMode(pros::E_MOTOR_BRAKE_COAST);
 
     while (true)
     {
         // chassis.tank(master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y), master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y));
-        chassis.arcade(master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y), master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X));
+        chassis.tank(master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y), master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y));
         intakeControl();
         moveStakeMech();
         updateClamp();
         stickControl();
+
+        // if(master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X)){
+        //     autonomous();
+        // }
+
         // pros::lcd::print(0, "X: %f", chassis.getPose().x); // x
         // pros::lcd::print(1, "Y: %f", chassis.getPose().y); // y
         // pros::lcd::print(2, "Theta: %f", chassis.getPose().theta); // heading

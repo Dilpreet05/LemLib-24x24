@@ -20,7 +20,7 @@ void intakeControl()
     }
 
     // Intake while holding R1 or if the ring is the desired color
-    else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R1) || ring_is_red())
+    else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R1) )
     {
         hookIntakeMotor.move(-hook_intake_speed);
         flexWheelIntakeMotor.move(-127);

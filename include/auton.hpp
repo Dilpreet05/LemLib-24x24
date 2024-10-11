@@ -12,7 +12,13 @@ void clampDown();
 
 void intake();
 void outtake();
+void stopIntake();
 void switchIntakeSpeed();
 
 void stickUp();
 void stickDown();
+
+void liftMove();
+
+
+void redRightSide();

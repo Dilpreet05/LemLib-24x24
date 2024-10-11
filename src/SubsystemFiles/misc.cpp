@@ -1,4 +1,5 @@
 #include "main.h"
+#include "pros/motors.h"
 // #include "gif-pros/gifclass.hpp"
 // #include "asset.h" // IWYU pragma: keep
 
@@ -9,6 +10,7 @@ pros::Optical ring_optic_sensor(15);
 // Helper function to set brakes on all subsystems
 void setBrakes()
 {
+    chassis.setBrakeMode(pros::E_MOTOR_BRAKE_COAST);
     setIntakeBrakes();
     setStakeMotorBrake();
     setStickBrakes();
