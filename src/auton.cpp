@@ -3,86 +3,116 @@
 /* Tuning Functions */
 
 // tune kP and kD
-void tuneAngularPID(){
+void tuneAngularPID()
+{
     chassis.setPose(0, 0, 0);
     chassis.turnToHeading(90, 10000);
 }
 
-
-
-
-void tuneLinearPID(){
+void tuneLinearPID()
+{
     chassis.setPose(0, 0, 0);
     chassis.moveToPoint(0, 48, 10000);
 }
 
-
-
 /* Subsystems */
 int intakeSpeed = 127;
 
-void clampDown(){
+void clampDown()
+{
     leftClampPiston.set_value(1);
     rightClampPiston.set_value(1);
 }
 
-void clampUp(){
+void clampUp()
+{
     leftClampPiston.set_value(0);
     rightClampPiston.set_value(0);
 }
-
-void intake(){
-    hookIntakeMotor.move(-intakeSpeed);
+int desiredHookIntakeSpeed = 0;
+void intake()
+{
+    desiredHookIntakeSpeed = -intakeSpeed;
+    // hookIntakeMotor.move(-intakeSpeed);
     flexWheelIntakeMotor.move(-127);
 }
 
-void outtake(){
-    hookIntakeMotor.move(intakeSpeed);
+void outtake()
+{
+    desiredHookIntakeSpeed = intakeSpeed;
+    // hookIntakeMotor.move(intakeSpeed);
     flexWheelIntakeMotor.move(127);
 }
 
-void stopIntake(){
-    hookIntakeMotor.move(0);
-    flexWheelIntakeMotor.move(0);    
+void stopIntake()
+{
+    desiredHookIntakeSpeed = 0;
+    // hookIntakeMotor.move(0);
+    flexWheelIntakeMotor.move(0);
 }
 
-void liftMove(int n){
-    
-    if(n=0){
-        // downwards position
-        stakeMotor.move_absolute(0,127);
-    }else if(n=1){
-        // upwards position
-        stakeMotor.move_absolute(-200,127);
-    }else if(n=2){
-        // score position AND position for AWP Ladder touch.
-        stakeMotor.move_absolute(-300,127);
-    }
+void liftMove(int n)
+{
 
+    if (n = 0)
+    {
+        // downwards position
+        stakeMotor.move_absolute(0, 127);
+    }
+    else if (n = 1)
+    {
+        // upwards position
+        stakeMotor.move_absolute(-200, 127);
+    }
+    else if (n = 2)
+    {
+        // score position AND position for AWP Ladder touch.
+        stakeMotor.move_absolute(-300, 127);
+    }
+}
+
+void intakeTask(void* parameter)
+{
+    // Spits out ring if its the wrong color
+    // Otherwise it acts normally
+    while (true)
+    {
+        if (ring_is_red())
+        // if (ring_is_blue())
+        {
+            hookIntakeMotor.move(-127);
+            pros::delay(1250);
+        }
+        else
+        {
+            hookIntakeMotor.move(desiredHookIntakeSpeed);
+        }
+    }
 }
 
 ASSET(path1_txt)
 
-void redRightSide(){
+void redRightSide()
+{
 
-    chassis.setPose(-61.696,-32.171,270);
+    chassis.setPose(-61.696, -32.171, 270);
 
-    chassis.moveToPoint(-32, -32.171, 1200,{.forwards=false,.maxSpeed=100},false);
+    chassis.moveToPoint(-32, -32.171, 1200, {.forwards = false, .maxSpeed = 100}, false);
 
-    chassis.turnToPoint(-24,-24,500,{.forwards=false});
+    chassis.turnToPoint(-24, -24, 500, {.forwards = false});
     liftMove(1);
 
-    chassis.moveToPoint(-18, -18, 700,{.forwards=false,.minSpeed=90});
+    chassis.moveToPoint(-18, -18, 700, {.forwards = false, .minSpeed = 90});
     chassis.waitUntil(10);
     clampDown();
 
-    chassis.moveToPoint(-24, -54, 1250,{.minSpeed=70});
+    chassis.moveToPoint(-24, -54, 1250, {.minSpeed = 70});
     intake();
 
     pros::delay(2500);
     stopIntake();
 
-    chassis.moveToPoint(-38, -48, 1500,{.forwards=false,.minSpeed=100},false);
+    chassis.moveToPoint(-38, -48, 1500, {.forwards = false, .minSpeed = 100}, false);
     stopIntake();
     clampUp();
 
@@ -91,8 +121,5 @@ void redRightSide(){
 
     // chassis.moveToPose(-15, -15, 45,1500,{.lead=8},false);
     // liftMove(3);
-
-
-
-
 }
+

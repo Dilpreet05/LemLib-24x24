@@ -72,7 +72,7 @@ void competition_initialize() {}
  */
 void autonomous()
 {
-
+    pros::Task intakingTask(intakeTask, NULL, "intake task");
     // tuneAngularPID();
     // tuneLinearPID();
     redRightSide();

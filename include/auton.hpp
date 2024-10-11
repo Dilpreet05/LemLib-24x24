@@ -14,7 +14,7 @@ void intake();
 void outtake();
 void stopIntake();
 void switchIntakeSpeed();
-
+void intakeTask(void* parameter);
 void stickUp();
 void stickDown();
 
