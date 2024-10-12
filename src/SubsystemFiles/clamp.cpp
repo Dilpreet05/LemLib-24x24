@@ -2,7 +2,7 @@
 // #include "pros/misc.h"
 
 pros::adi::DigitalOut leftClampPiston('A', LOW);
-pros::adi::DigitalOut rightClampPiston('B', LOW);
+pros::adi::DigitalOut rightClampPiston('C', LOW);
 
 void updateClamp()
 {
