@@ -94,7 +94,6 @@ ASSET(path1_txt)
 
 void redRightSide()
 {
-
     chassis.setPose(-61.696, -32.171, 270);
 
     chassis.moveToPoint(-32, -32.171, 1200, {.forwards = false, .maxSpeed = 100}, false);
@@ -125,8 +124,18 @@ void redRightSide()
 
 void gauresh()
 {
-    chassis.setPose(-58.44, -44.16, 230);
+    chassis.setPose(-55.874, -42.132, 240);
 
     liftMove(1);
-    chassis.moveToPoint(-20, -20, 1200, {.forwards = false, .maxSpeed = 100}, false);
+    chassis.moveToPoint(-34.209, -28.979, 1200, {.forwards = false, .maxSpeed = 80}, true);
+    chassis.moveToPoint(-21, -21, 1200, {.forwards = false, .maxSpeed = 50}, false);
+
+    clampDown();
+    pros::delay(500);
+
+    // chassis.moveToPose(-21, -10, 180, 1200, {.maxSpeed = 80}, false);
+
+    intake();
+
+    chassis.moveToPoint(-18, -49, 1200, {.forwards = true, .maxSpeed = 80}, false);
 }

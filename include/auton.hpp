@@ -20,5 +20,5 @@ void stickDown();
 
 void liftMove();
 
-void gauresh();
 void redRightSide();
+void gauresh();
