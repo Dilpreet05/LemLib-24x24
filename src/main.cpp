@@ -72,7 +72,7 @@ void competition_initialize() {}
  */
 void autonomous()
 {
-    pros::Task intakingTask(intakeTask, NULL, "intake task");
+    // pros::Task intakingTask(intakeTask, NULL, "intake task");
     // tuneAngularPID();
     // tuneLinearPID();
     redRightSide();
@@ -99,20 +99,14 @@ void opcontrol()
 
     while (true)
     {
-        chassis.arcade(master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y), master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X));
         // chassis.tank(master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y), master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y));
+        chassis.arcade(master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y), master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X));
         intakeControl();
-        moveStakeMech();
+        // moveStakeMech();
+        tuneStakePID();
         updateClamp();
         stickControl();
 
-        // if(master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X)){
-        //     autonomous();
-        // }
-
-        // pros::lcd::print(0, "X: %f", chassis.getPose().x); // x
-        // pros::lcd::print(1, "Y: %f", chassis.getPose().y); // y
-        // pros::lcd::print(2, "Theta: %f", chassis.getPose().theta); // heading
 
         // check_motors_and_get_temps();
     }

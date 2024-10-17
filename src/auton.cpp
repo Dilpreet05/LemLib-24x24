@@ -34,21 +34,21 @@ int desiredHookIntakeSpeed = 0;
 void intake()
 {
     desiredHookIntakeSpeed = -intakeSpeed;
-    // hookIntakeMotor.move(-intakeSpeed);
+    hookIntakeMotor.move(-intakeSpeed);
     flexWheelIntakeMotor.move(-127);
 }
 
 void outtake()
 {
     desiredHookIntakeSpeed = intakeSpeed;
-    // hookIntakeMotor.move(intakeSpeed);
+    hookIntakeMotor.move(intakeSpeed);
     flexWheelIntakeMotor.move(127);
 }
 
 void stopIntake()
 {
     desiredHookIntakeSpeed = 0;
-    // hookIntakeMotor.move(0);
+    hookIntakeMotor.move(0);
     flexWheelIntakeMotor.move(0);
 }
 
@@ -98,7 +98,7 @@ ASSET(path1_txt)
 void redRightSide()
 {
 
-    chassis.setPose(-61.287,-11.054,270);
+    chassis.setPose(-61.287,-32.171,270);
 
     chassis.moveToPoint(-32, -32.171, 1200, {.forwards = false, .maxSpeed = 100}, false);
 

@@ -8,6 +8,7 @@ pros::Motor hookIntakeMotor(12, pros::MotorGearset::green, pros::v5::MotorUnits:
 
 int fast_hook_intake_speed = 127;
 int slow_hook_intake_speed = 100;
+int super_slow_intake_speed = 60;
 int hook_intake_speed = fast_hook_intake_speed;
 
 void intakeControl()
@@ -37,6 +38,9 @@ void intakeControl()
     if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A))
     {
         hook_intake_speed = hook_intake_speed == fast_hook_intake_speed ? slow_hook_intake_speed : fast_hook_intake_speed;
+    }
+    if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X)){
+        hook_intake_speed = super_slow_intake_speed;
     }
 }
 

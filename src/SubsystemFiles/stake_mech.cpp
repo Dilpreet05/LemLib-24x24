@@ -1,17 +1,15 @@
+#include "lemlib/pid.hpp"
 #include "main.h"
-#include "pros/adi.h"
-#include "pros/adi.hpp"
-#include "pros/misc.h"
 
 pros::Motor stakeMotor(11, pros::MotorGearset::green, pros::MotorUnits::degrees);
-pros::adi::DigitalOut leftSide('H', LOW);
-pros::adi::DigitalOut rightSide('G', LOW);
-bool pistonState = false;
 
 int speed = 127;
 
+lemlib::PID stakePID(5,0,20,0,false);
+
 void moveStakeMech()
 {
+
     // Move stake motor while holding y
     if (master.get_digital(pros::E_CONTROLLER_DIGITAL_Y))
     {
@@ -30,13 +28,7 @@ void moveStakeMech()
         stakeMotor.brake();
     }
 
-    // Press DOWN to toggle the left and right pistons
-    if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_LEFT))
-    {
-        pistonState = !pistonState;
-        leftSide.set_value(pistonState);
-        rightSide.set_value(pistonState);
-    }
+
 }
 
 void setStakeMotorBrake()

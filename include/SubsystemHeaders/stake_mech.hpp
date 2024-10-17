@@ -3,8 +3,8 @@
 
 
 extern pros::Motor stakeMotor;
-extern pros::adi::DigitalOut leftSide;
-extern pros::adi::DigitalOut rightSide;
+extern lemlib::PID stakePID;
 
 void setStakeMotorBrake();
 void moveStakeMech();
+void tuneStakePID();

@@ -1,7 +1,7 @@
 {
   "py/object": "pros.conductor.project.Project",
   "py/state": {
-    "project_name": "Jenna press this one",
+    "project_name": "tuning",
     "target": "v5",
     "templates": {
       "LemLib": {
@@ -319,8 +319,8 @@
     },
     "upload_options": {
       "icon": "pizza",
-      "slot": 1,
-      "after": "screen",
+      "slot": 3,
+      "after": "run",
       "description": "Code for 24x24 Robot"
     },
     "use_early_access": false
