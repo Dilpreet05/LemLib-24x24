@@ -75,7 +75,8 @@ void autonomous()
     // pros::Task intakingTask(intakeTask, NULL, "intake task");
     // tuneAngularPID();
     // tuneLinearPID();
-    redRightSide();
+    // redRightSide();
+    centerRush(1);
 
 }
 
@@ -102,7 +103,7 @@ void opcontrol()
         // chassis.tank(master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y), master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y));
         chassis.arcade(master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y), master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X));
         intakeControl();
-        // moveStakeMech();
+        moveStakeMech();
         // tuneStakePID();
         updateClamp();
         stickControl();

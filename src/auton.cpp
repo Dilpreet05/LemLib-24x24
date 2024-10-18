@@ -55,17 +55,17 @@ void stopIntake()
 void liftMove(int n)
 {
 
-    if (n = 0)
+    if (n == 0)
     {
         // downwards position
         stakeMotor.move_absolute(0, 127);
     }
-    else if (n = 1)
+    else if (n == 1)
     {
         // upwards position
         stakeMotor.move_absolute(-200, 127);
     }
-    else if (n = 2)
+    else if (n == 2)
     {
         // score position AND position for AWP Ladder touch.
         stakeMotor.move_absolute(-300,127);
@@ -145,3 +145,13 @@ void redRightSide()
 
 }
 
+void bottomRush(int color){
+    // 1 for red, -1 for blue
+
+    chassis.setPose(-52.746,-60.263,270);
+
+    chassis.moveToPoint(-15-60.263,  -60.263, 4000,{.forwards=false});
+    chassis.turnToPoint(0, -48, 500,{.forwards=false});
+    // chassis.moveToPoint(0, -48, 1500,{.forwards=false});
+
+}

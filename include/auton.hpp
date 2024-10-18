@@ -20,5 +20,7 @@ void stickDown();
 
 void liftMove();
 
-
 void redRightSide();
+
+/* 1 represents red, -1 represents blue */
+void bottomRush(int color);
