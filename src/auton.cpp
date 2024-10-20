@@ -1,5 +1,6 @@
 #include "lemlib/chassis/chassis.hpp"
 #include "main.h" // IWYU pragma: keep
+#include "pros/rtos.hpp"
 
 /* Tuning Functions */
 
@@ -73,6 +74,15 @@ void liftMove(int n)
         stakeMotor.move_absolute(-500, 80);
     }
 }
+
+void stickMove(int n){
+    if(n==1){
+        stickMotor.move_absolute(-400, 127);
+    }else{
+        stickMotor.move_absolute(0, 127);
+    }
+}
+
 
 void intakeTask(void* parameter)
 {
@@ -148,10 +158,16 @@ void redRightSide()
 void bottomRush(int color){
     // 1 for red, -1 for blue
 
-    chassis.setPose(-52.746,-60.263,270);
+    chassis.setPose(-58,-30,270);
 
-    chassis.moveToPoint(-15-60.263,  -60.263, 4000,{.forwards=false});
-    chassis.turnToPoint(0, -48, 500,{.forwards=false});
-    // chassis.moveToPoint(0, -48, 1500,{.forwards=false});
+    chassis.moveToPoint(-24*color,  -30, 1500,{.forwards=false});
+    chassis.turnToPoint(-10*color, -36,1000,{.forwards=false});
+    chassis.moveToPoint(-10*color, -36, 1500,{.forwards=false});
+    stakeMotor.move_absolute(-200, 127);
+    chassis.waitUntil(5);
+
+    stickMotor.move_relative(-125, 127);
+
+    chassis.moveToPoint(-10-20*color, -33+20, 1500);
 
 }

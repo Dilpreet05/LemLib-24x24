@@ -18,7 +18,8 @@ void intakeTask(void* parameter);
 void stickUp();
 void stickDown();
 
-void liftMove();
+void liftMove(int);
+void stickMove(int n);
 
 void redRightSide();
 

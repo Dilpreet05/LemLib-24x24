@@ -82,8 +82,4 @@
 #include "pros/vision.hpp"
 #endif
 
-#include "asset.h"
-#include "gif-pros/gifclass.hpp"
-#include "gif-pros/gifdec.h"
-
 #endif  // _PROS_API_H_

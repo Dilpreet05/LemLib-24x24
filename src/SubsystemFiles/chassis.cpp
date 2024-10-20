@@ -136,7 +136,7 @@ pros::Rotation verticalTrackingWheelSensor(19);
  *
  */
 // lemlib::TrackingWheel horizontalTrackingWheel(&horizontalTrackingWheelSensor, 2.76, 0);
-lemlib::TrackingWheel verticalTrackingWheel(&verticalTrackingWheelSensor, 2.76, 0);
+lemlib::TrackingWheel verticalTrackingWheel(&verticalTrackingWheelSensor, 1.96, 0);
 
 /**
  *
@@ -205,7 +205,7 @@ lemlib::ControllerSettings angularController(3,   // proportional gain (kP)
                                              16.25,  // derivative gain (kD)
                                              3,   // anti windup
                                              1, // small error range, in deg
-                                             75, // small error range timeout, in milliseconds
+                                             100, // small error range timeout, in milliseconds
                                              3, // large error range, in deg
                                              250, // large error range timeout, in milliseconds
                                              127    // maximum acceleration (slew)

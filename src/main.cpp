@@ -72,11 +72,15 @@ void competition_initialize() {}
  */
 void autonomous()
 {
+    stickMotor.tare_position();
+    stakeMotor.tare_position();
+    chassis.setPose(0,-48,270);
     // pros::Task intakingTask(intakeTask, NULL, "intake task");
     // tuneAngularPID();
     // tuneLinearPID();
     // redRightSide();
-    centerRush(1);
+    bottomRush(1);
+    // stickMotor.move_relative(-200,127);
 
 }
 
