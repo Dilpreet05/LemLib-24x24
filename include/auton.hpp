@@ -1,6 +1,7 @@
 #include "main.h" // IWYU pragma: keep
 
 
+
 void tuneAngularPID();
 void tuneAngularWindUp();
 void tuneLinearPID();
@@ -20,6 +21,8 @@ void stickDown();
 
 void liftMove(int);
 void stickMove(int n);
+
+void skills();
 
 void redRightSide();
 

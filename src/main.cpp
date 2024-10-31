@@ -9,31 +9,33 @@
 // ASSET(hot_chip_gif)
 // ASSET(chip_gif)
 // ASSET(spongebob_gif)
-ASSET(test_txt)
+// ASSET(test_txt)
 
 void initialize()
 {
-    pros::lcd::initialize(); // initialize brain screen
-    // pros::lcd::clear();
-
-    // gif = new Gif(chip_gif,lv_scr_act());
-
-    // pros::delay(2000);
+    
+    console.focus();
+    console.printf("Initializing...\n");
     chassis.calibrate(); // calibrate sensors
     setBrakes();
+    // pros::lcd::initialize(); // initialize brain screen
+    console.printf("Done.\nGoing to selector.");
+    pros::delay(250);
+
+    selector.focus();
 
     // print position to brain screen
 
-    pros::Task screen_task([&]()
-                           {
-        while (true) {
-            // print robot location to the brain screen
-            pros::lcd::print(0, "X: %f", chassis.getPose().x); // x
-            pros::lcd::print(1, "Y: %f", chassis.getPose().y); // y
-            pros::lcd::print(2, "Theta: %f", chassis.getPose().theta); // heading
-            // delay to save resources
-            pros::delay(20);
-        } });
+    // pros::Task screen_task([&]()
+    //                        {
+    //     while (true) {
+    //         // print robot location to the brain screen
+    //         pros::lcd::print(0, "X: %f", chassis.getPose().x); // x
+    //         pros::lcd::print(1, "Y: %f", chassis.getPose().y); // y
+    //         pros::lcd::print(2, "Theta: %f", chassis.getPose().theta); // heading
+    //         // delay to save resources
+    //         pros::delay(20);
+    //     } });
 }
 
 /**
@@ -74,12 +76,14 @@ void autonomous()
 {
     stickMotor.tare_position();
     stakeMotor.tare_position();
-    chassis.setPose(0,-48,270);
+    // chassis.setPose(0,-48,270);
+
+    selector.run_auton();
     // pros::Task intakingTask(intakeTask, NULL, "intake task");
     // tuneAngularPID();
     // tuneLinearPID();
     // redRightSide();
-    bottomRush(1);
+    // bottomRush(1);
     // stickMotor.move_relative(-200,127);
 
 }
@@ -104,15 +108,15 @@ void opcontrol()
 
     while (true)
     {
-        // chassis.tank(master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y), master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y));
-        chassis.arcade(master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y), master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X));
+        chassis.tank(master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y), master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y));
+        // chassis.arcade(master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y), master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X));
         intakeControl();
         moveStakeMech();
         // tuneStakePID();
         updateClamp();
         stickControl();
 
-
+        pros::delay(25);
         // check_motors_and_get_temps();
     }
 }

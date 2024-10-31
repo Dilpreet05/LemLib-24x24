@@ -36,6 +36,7 @@
 
 #include "api.h" // IWYU pragma: keep
 #include "lemlib/api.hpp" // IWYU pragma: keep
+#include "robodash/api.h"
 
 
 #include "SubsystemHeaders/intake.hpp"

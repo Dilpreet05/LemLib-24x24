@@ -1,10 +1,19 @@
 #include "main.h"
-#include "pros/motors.h"
-// #include "gif-pros/gifclass.hpp"
-// #include "asset.h" // IWYU pragma: keep
+
 
 // This file exists just so that we can have a global variables that dont belong to a subsystem.
-// Gif *gif;
+//Auton Selector
+rd::Selector selector({
+    {"Skills", &skills},
+    {"Auton 1 ", &redRightSide},
+    {"Auton 2!", &stopIntake}
+    
+});
+
+rd::Console console;
+
+
+
 pros::Controller master(pros::E_CONTROLLER_MASTER);
 pros::Optical ring_optic_sensor(15);
 // Helper function to set brakes on all subsystems

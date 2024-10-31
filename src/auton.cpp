@@ -2,6 +2,7 @@
 #include "main.h" // IWYU pragma: keep
 #include "pros/rtos.hpp"
 
+
 /* Tuning Functions */
 
 // tune kP and kD
@@ -170,4 +171,37 @@ void bottomRush(int color){
 
     chassis.moveToPoint(-10-20*color, -33+20, 1500);
 
+}
+
+
+
+
+/* skills */
+
+void skills(){
+
+    // chassis.setPose(0,0,270);
+    chassis.setPose(-52,32,270);
+
+    chassis.moveToPoint(-37, 32, 1000,{.forwards=false});
+
+    chassis.turnToPoint(-24, 48, 750,{.forwards=false},false);
+    chassis.moveToPoint(-22, 50, 1500,{.forwards=false},false);
+    chassis.waitUntilDone();
+    clampDown();
+    stakeMotor.move_absolute(200, 127);
+
+    chassis.turnToPoint(-24, 24, 750);
+    chassis.moveToPoint(-24, 12, 1500);
+    intake();
+    // chassis.moveToPoint(-24, 32, 2500,{.maxSpeed=30});
+
+
+    chassis.turnToPoint(-48, 48, 750);
+    chassis.moveToPoint(-48, 48, 2000);
+    chassis.waitUntilDone();
+
+    // stopIntake();
+
+    // chassis.moveToPose(24, 24, 90, 1750,{.forwards=false,.lead=15});  
 }

@@ -4,10 +4,10 @@
 
 // Placeholder motor ports.
 pros::Motor flexWheelIntakeMotor(20, pros::MotorGearset::green, pros::v5::MotorUnits::degrees);
-pros::Motor hookIntakeMotor(12, pros::MotorGearset::green, pros::v5::MotorUnits::degrees);
+pros::Motor hookIntakeMotor(12, pros::MotorGearset::red, pros::v5::MotorUnits::degrees);
 
 int fast_hook_intake_speed = 127;
-int slow_hook_intake_speed = 100;
+int slow_hook_intake_speed = 118;
 int super_slow_intake_speed = 60;
 int hook_intake_speed = fast_hook_intake_speed;
 
