@@ -2,6 +2,11 @@
 
 pros::Motor stickMotor(5, pros::MotorGearset::green, pros::v5::MotorUnits::degrees);
 
+/**
+ * 
+ * 
+ * 
+ */
 void stickControl()
 {
     if (master.get_digital(DIGITAL_RIGHT))
