@@ -5,7 +5,8 @@
 //Auton Selector
 rd::Selector selector({
     {"Skills", &skills},
-    {"Auton 1 ", &redRightSide},
+    
+    {"Red Top", &redTopRush},
     {"Auton 2!", &stopIntake}
     
 });

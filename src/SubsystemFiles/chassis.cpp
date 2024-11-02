@@ -114,8 +114,11 @@ pros::Imu IMU(13);
 /**
  *
  * HORIZONTALTRACKINGSENSOR:
- * ! sensor tracks any movement in the horizontal direction of our robot, this is use a lot in the case where our auton paths stray
+ * ! sensor tracks any movement in the horizontal direction of our robot, this is used a lot in the case where our auton paths stray
  * ! due to horizontal contact from our or opposing alliance robots.
+ * 
+ * ! Horizontal tracking wheels are recommended, however we we're unable to fit one on to our build
+ * ! After doing testing, we came to the conclusion that using traction wheels would help us mitigate autonomous inconsistancys in curved movements
  *
  * VERTICALTRACKINGSENSOR:
  * ! sensor tracks vertical movement/straight movements of the robot.
@@ -123,19 +126,18 @@ pros::Imu IMU(13);
  *
  *
  */
-pros::Rotation horizontalTrackingWheelSensor(6);
+pros::Rotation horizontalTrackingWheelSensor(0); // we do not use a horizontal tracker, this is here do demonstrate how creating one would look like.
 pros::Rotation verticalTrackingWheelSensor(19);
 
 /**
  *
- *! These lines of code bind the previously made horizontal and vertical TrackingWheelSensors into a new object that represents
- *! the tracking wheels.
+ *! These lines of code bind the previously made vertical TrackingWheelSensors into a new object that represents
+ *! the tracking wheel.
  *
- *! We will use these tracking wheels in order to physically track our robots movements, same explanation from sensors applies.
- *
+ *! We will use this tracking wheel in order to physically track our robots movements, same explanation from sensors applies.
+ *! Our tracking wheel is custom designed by us at AYO and has a measured diameter of ~1.96
  *
  */
-// lemlib::TrackingWheel horizontalTrackingWheel(&horizontalTrackingWheelSensor, 2.76, 0);
 lemlib::TrackingWheel verticalTrackingWheel(&verticalTrackingWheelSensor, 1.96, 0);
 
 /**

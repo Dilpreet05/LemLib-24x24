@@ -24,7 +24,7 @@ void stickMove(int n);
 
 void skills();
 
-void redRightSide();
+void redTopRush();
 
 /* 1 represents red, -1 represents blue */
 void bottomRush(int color);

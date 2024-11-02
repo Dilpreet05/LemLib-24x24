@@ -13,13 +13,13 @@ void moveStakeMech()
     // Move stake motor while holding y
     if (master.get_digital(pros::E_CONTROLLER_DIGITAL_Y))
     {
-        stakeMotor.move(-speed);
+        stakeMotor.move_absolute(0, 127);
     }
 
     // Move stake motor the other way while holding B
     else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_B))
     {
-        stakeMotor.move(speed);
+        stakeMotor.move_absolute(367, 127);
     }
 
     // Stop otherwise

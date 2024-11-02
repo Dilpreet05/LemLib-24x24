@@ -1,7 +1,7 @@
 #include "lemlib/chassis/chassis.hpp"
 #include "main.h" // IWYU pragma: keep
 #include "pros/rtos.hpp"
-
+ASSET(corner_txt)
 
 /* Tuning Functions */
 
@@ -104,75 +104,27 @@ void intakeTask(void* parameter)
     }
 }
 
-ASSET(path1_txt)
 
-void redRightSide()
-{
 
-    chassis.setPose(-61.287,-32.171,270);
 
-    chassis.moveToPoint(-32, -32.171, 1200, {.forwards = false, .maxSpeed = 100}, false);
+/* match autons */
 
-    chassis.turnToPoint(-24, -24, 500, {.forwards = false});
-    liftMove(1);
+void redTopRush(){
+    chassis.setPose(-52,32,270);
 
-    chassis.moveToPoint(-18, -18, 1200,{.forwards=false,.minSpeed=90});
-    chassis.waitUntil(10);
+
+    chassis.moveToPose(-15, 45, 210, 3000,{.forwards=false,.lead=.5,.minSpeed=70},false);  
+
+    stickMotor.move(- 127);
+    pros::delay(500);
+
+    chassis.moveToPoint(-48, 24, 1750,{.maxSpeed=80},false);
+    stickMotor.move_absolute(0, 127);
+
+    chassis.moveToPose(-35, 30, 270, 2000,{.forwards=false},false);
     clampDown();
 
-    // chassis.moveToPoint(-55, -11.054, 750,{.forwards=false});
-
-    // chassis.swingToPoint(-24, -24, DriveSide::RIGHT, 750,{.forwards=false});
-
-    // chassis.moveToPoint(-24, -24, 1500,{.forwards=false,.minSpeed=100});
-    // clampDown();
-
-    chassis.moveToPoint(-24, -54, 2000,{.minSpeed=70});
-    intake();
-    
-    chassis.moveToPoint(-24, -50, 500,{.forwards=false,.minSpeed=127},false);
-    chassis.moveToPoint(-24, -58, 500,{.forwards=false,.minSpeed=127},false);
-    chassis.moveToPoint(-24, -50, 500,{.forwards=false,.minSpeed=127},false);
-    chassis.moveToPoint(-24, -58, 500,{.forwards=false,.minSpeed=127},false);
-
-    pros::delay(1500);
-    stopIntake();
-
-    chassis.moveToPoint(-38, -48, 2000,{.forwards=false,.minSpeed=50},false);
-    stopIntake();
-    clampUp();
-
-    // chassis.moveToPoint(-2,-48,2000,{.forwards=false,.minSpeed=120},false);
-    // clampDown();
-
-    chassis.moveToPoint(-18, -18, 1500,{.minSpeed=20},false);
-    chassis.turnToPoint(-17, -17, 500);
-
-    stakeMotor.move(-100);
-    pros::delay(1000);
-    stakeMotor.brake();
-
-
-
 }
-
-void bottomRush(int color){
-    // 1 for red, -1 for blue
-
-    chassis.setPose(-58,-30,270);
-
-    chassis.moveToPoint(-24*color,  -30, 1500,{.forwards=false});
-    chassis.turnToPoint(-10*color, -36,1000,{.forwards=false});
-    chassis.moveToPoint(-10*color, -36, 1500,{.forwards=false});
-    stakeMotor.move_absolute(-200, 127);
-    chassis.waitUntil(5);
-
-    stickMotor.move_relative(-125, 127);
-
-    chassis.moveToPoint(-10-20*color, -33+20, 1500);
-
-}
-
 
 
 
@@ -180,28 +132,47 @@ void bottomRush(int color){
 
 void skills(){
 
-    // chassis.setPose(0,0,270);
     chassis.setPose(-52,32,270);
 
-    chassis.moveToPoint(-37, 32, 1000,{.forwards=false});
-
-    chassis.turnToPoint(-24, 48, 750,{.forwards=false},false);
-    chassis.moveToPoint(-22, 50, 1500,{.forwards=false},false);
+    chassis.moveToPose(-24, 48, 220, 2500,{.forwards=false,.lead=.3,.minSpeed=60,.earlyExitRange=6});
     chassis.waitUntilDone();
     clampDown();
-    stakeMotor.move_absolute(200, 127);
+    stakeMotor.move_absolute(200, 70);
 
     chassis.turnToPoint(-24, 24, 750);
-    chassis.moveToPoint(-24, 12, 1500);
+    chassis.moveToPoint(-24, 24, 1500);
     intake();
-    // chassis.moveToPoint(-24, 32, 2500,{.maxSpeed=30});
+    chassis.moveToPoint(-24, 12, 2500,{.maxSpeed=40});
 
 
     chassis.turnToPoint(-48, 48, 750);
     chassis.moveToPoint(-48, 48, 2000);
     chassis.waitUntilDone();
 
-    // stopIntake();
 
-    // chassis.moveToPose(24, 24, 90, 1750,{.forwards=false,.lead=15});  
+    // chassis.moveToPoint(-60, 60, 2500,{},false);
+
+    // pros::delay(2000);
+
+
+
+    chassis.moveToPoint(-50, 50, 1000,{.forwards=true},false);
+    pros::delay(2000);
+    chassis.turnToPoint(-60, 60, 750,{.forwards=false});
+    chassis.moveToPoint(-60, 60, 1500,{.forwards=false},false);
+    outtake();
+    clampUp();
+
+
+
+    chassis.moveToPoint(0, 60, 3000);
+    chassis.waitUntil(15);
+    intake();
+    // stopIntake();
+    stakeMotor.move_absolute(0, 70);
+
+    pros::delay(3000);
+    stopIntake();
+    stakeMotor.move_absolute(250, 80);
+
 }
