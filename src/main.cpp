@@ -108,15 +108,12 @@ void opcontrol()
 
     while (true)
     {
-        // chassis.tank(master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y), master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y));
-        chassis.arcade(master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y), master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X));
+        chassis.tank(master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y), master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y));
         intakeControl();
         moveStakeMech();
-        // tuneStakePID();
         updateClamp();
         stickControl();
 
         pros::delay(25);
-        // check_motors_and_get_temps();
     }
 }

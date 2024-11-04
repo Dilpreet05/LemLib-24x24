@@ -113,17 +113,22 @@ void redTopRush(){
     chassis.setPose(-52,32,270);
 
 
-    chassis.moveToPose(-15, 45, 210, 3000,{.forwards=false,.lead=.5,.minSpeed=70},false);  
-
+    chassis.moveToPose(-18, 40, 220, 3000,{.forwards=false,.lead=.4,.minSpeed=80,.earlyExitRange=20});  
+    chassis.waitUntil(40);
     stickMotor.move(- 127);
-    pros::delay(500);
 
-    chassis.moveToPoint(-48, 24, 1750,{.maxSpeed=80},false);
+    chassis.moveToPoint(-48, 24, 1750,{.maxSpeed=70},false);
     stickMotor.move_absolute(0, 127);
 
-    chassis.moveToPose(-35, 30, 270, 2000,{.forwards=false},false);
-    clampDown();
+    // chassis.moveToPose(-35, 30, 270, 2000,{.forwards=false},false);
 
+    // chassis.moveToPoint(-25, 30, 1500,{.forwards=false},false);
+    // clampDown();
+    // stakeMotor.move_absolute(200, 70);
+    
+    // chassis.turnToPoint(-48, 48, 750);
+    // chassis.moveToPoint(-48, 48, 1750,{});
+    // intake();
 }
 
 

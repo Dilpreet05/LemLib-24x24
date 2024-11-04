@@ -20,7 +20,7 @@ void intakeControl()
         flexWheelIntakeMotor.move(127);
     }
 
-    // Intake while holding R1 or if the ring is the desired color
+    // Intake while holding R1
     else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R1) )
     {
         hookIntakeMotor.move(-hook_intake_speed);
@@ -37,7 +37,7 @@ void intakeControl()
     // Swap the hook intake speed
     if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A))
     {
-        hook_intake_speed = hook_intake_speed == fast_hook_intake_speed ? slow_hook_intake_speed : fast_hook_intake_speed;
+        hook_intake_speed = (hook_intake_speed == fast_hook_intake_speed) ? slow_hook_intake_speed : fast_hook_intake_speed;
     }
     if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X)){
         hook_intake_speed = super_slow_intake_speed;
