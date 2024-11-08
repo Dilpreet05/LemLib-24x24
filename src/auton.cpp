@@ -1,7 +1,8 @@
 #include "lemlib/chassis/chassis.hpp"
 #include "main.h" // IWYU pragma: keep
 #include "pros/rtos.hpp"
-ASSET(corner_txt)
+ASSET(SkillsPath_1_txt);
+
 
 /* Tuning Functions */
 
@@ -105,44 +106,96 @@ void intakeTask(void* parameter)
 }
 
 
-
+void findStartingPose(){
+    chassis.setPose(0,48,270);
+}
 
 /* match autons */
 
 void redTopRush(){
-    chassis.setPose(-52,32,270);
+
+    chassis.setPose(-49,32,270);
+
+    stickMotor.move_absolute(75,70);
+    chassis.moveToPoint(-8, 45, 1750,{.forwards=false,.minSpeed=90,.earlyExitRange=8},false);
+    stickMotor.move(-127);
+    // pros::delay(125);
+
+    chassis.moveToPoint(-32, 32, 2000,{},false);
+    stickMotor.move_absolute(125, 127);
+    pros::delay(125);
+
+    chassis.moveToPose(-10, 36, 270, 1500,{.forwards=false},false);
+    clampDown();
+    stakeMotor.move_absolute(125, 75);
+
+    chassis.moveToPoint(-48, 48, 3000,{});
+    pros::delay(500);
+    intake();
+
+    pros::delay(1500);
+
+    chassis.moveToPoint(-24, 24, 1500,{.forwards=false},false);
+    clampUp();
+
+    chassis.moveToPoint(-47,24,2500,{});
+    stopIntake();
 
 
-    chassis.moveToPose(-18, 40, 220, 3000,{.forwards=false,.lead=.4,.minSpeed=80,.earlyExitRange=20});  
-    chassis.waitUntil(40);
-    stickMotor.move(- 127);
+    chassis.turnToPoint(-46, 0, 1250,{.forwards=false,.maxSpeed=90},false);
+    chassis.moveToPoint(-46, -13, 2500,{.forwards=false,.maxSpeed=105},false);
+    clampDown();
+    pros::delay(100);
 
-    chassis.moveToPoint(-48, 24, 1750,{.maxSpeed=70},false);
-    stickMotor.move_absolute(0, 127);
+    chassis.turnToPoint(-28, -5, 1750,{.forwards=false});
+    chassis.moveToPoint(-28,-5,2500,{.forwards=false},false);
 
-    // chassis.moveToPose(-35, 30, 270, 2000,{.forwards=false},false);
 
-    // chassis.moveToPoint(-25, 30, 1500,{.forwards=false},false);
-    // clampDown();
-    // stakeMotor.move_absolute(200, 70);
+    chassis.turnToPoint(-56, 5, 1250);
+    chassis.moveToPoint(-56, 5, 2500);
+    intake();
+
+    pros::delay(1500);
+
     
-    // chassis.turnToPoint(-48, 48, 750);
-    // chassis.moveToPoint(-48, 48, 1750,{});
-    // intake();
+
+    chassis.moveToPoint(-48, -5, 2000,{.forwards=false});
+    
+    chassis.turnToHeading(0, 750);
+    clampUp();
+
+    chassis.turnToHeading(45, 750);
+    chassis.moveToPoint(-24, 3, 1750,{.maxSpeed=80});
+
+
 }
 
 
 
 /* skills */
 
+
+void skills_pp(){
+    chassis.setPose(-49,32,270);
+    chassis.moveToPose(-24, 48, 220, 2500,{.forwards=false,.lead=.3,.minSpeed=60,.earlyExitRange=6});
+    chassis.waitUntilDone();
+    clampDown();
+    stakeMotor.move_absolute(200, 70);
+
+    chassis.turnToHeading(45, 750);
+    // chassis.follow(SkillsPath_1_txt, 12, 20000);
+}
+
 void skills(){
 
-    chassis.setPose(-52,32,270);
+    chassis.setPose(-49,32,270);
 
     chassis.moveToPose(-24, 48, 220, 2500,{.forwards=false,.lead=.3,.minSpeed=60,.earlyExitRange=6});
     chassis.waitUntilDone();
     clampDown();
     stakeMotor.move_absolute(200, 70);
+
+    // chassis.turnToHeading(float theta, int timeout)
 
     chassis.turnToPoint(-24, 24, 750);
     chassis.moveToPoint(-24, 24, 1500);

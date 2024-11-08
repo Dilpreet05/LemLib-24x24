@@ -23,6 +23,8 @@ void liftMove(int);
 void stickMove(int n);
 
 void skills();
+void skills_pp();
+void findStartingPose();
 
 void redTopRush();
 

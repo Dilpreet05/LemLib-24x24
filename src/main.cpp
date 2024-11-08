@@ -24,18 +24,23 @@ void initialize()
 
     selector.focus();
 
-    // print position to brain screen
+    pros::Task screenTask([&]() {
+        while (true) {
+            // print robot location to the brain screen
+			console.printf("X: %f\n", chassis.getPose().x);
+			console.printf("Y: %f\n",chassis.getPose().y);
+			console.printf("Theta: %f", chassis.getPose().theta);
 
-    // pros::Task screen_task([&]()
-    //                        {
-    //     while (true) {
-    //         // print robot location to the brain screen
-    //         pros::lcd::print(0, "X: %f", chassis.getPose().x); // x
-    //         pros::lcd::print(1, "Y: %f", chassis.getPose().y); // y
-    //         pros::lcd::print(2, "Theta: %f", chassis.getPose().theta); // heading
-    //         // delay to save resources
-    //         pros::delay(20);
-    //     } });
+            // log position telemetry
+            lemlib::telemetrySink()->info("Chassis pose: {}", chassis.getPose());
+
+            // delay to save resources
+            pros::delay(50);
+			console.clear();
+        }
+    });
+
+
 }
 
 /**
@@ -76,15 +81,10 @@ void autonomous()
 {
     stickMotor.tare_position();
     stakeMotor.tare_position();
-    // chassis.setPose(0,-48,270);
 
+    console.focus();
     selector.run_auton();
-    // pros::Task intakingTask(intakeTask, NULL, "intake task");
-    // tuneAngularPID();
-    // tuneLinearPID();
-    // redRightSide();
-    // bottomRush(1);
-    // stickMotor.move_relative(-200,127);
+
 
 }
 
@@ -108,12 +108,13 @@ void opcontrol()
 
     while (true)
     {
+        // chassis.arcade(pros::E_CONTROLLER_ANALOG_LEFT_Y, pros::E_CONTROLLER_ANALOG_RIGHT_X);
         chassis.tank(master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y), master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y));
         intakeControl();
         moveStakeMech();
         updateClamp();
         stickControl();
-
+//i like men
         pros::delay(25);
     }
 }
