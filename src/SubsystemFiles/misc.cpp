@@ -5,8 +5,9 @@
 rd::Selector selector({
     {"Skills", &skills_pp},
     
-    {"Red Top", &redTopRush},
-    {"Auton 2!", &stopIntake}
+    {"Red Left", &redTopRush},
+    {"Blue Left", &blueBottomRush},
+    
     
 });
 

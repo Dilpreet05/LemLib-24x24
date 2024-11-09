@@ -2,6 +2,7 @@
 #include "liblvgl/llemu.hpp"
 #include "liblvgl/lvgl.h" // IWYU pragma: keep
 #include "liblvgl/llemu.h" // IWYU pragma: keep
+#include "pros/adi.hpp"
 #include "pros/misc.h"
 
 // #include "asset.h"
@@ -10,6 +11,8 @@
 // ASSET(chip_gif)
 // ASSET(spongebob_gif)
 // ASSET(test_txt)
+
+pros::adi::Encoder enc('A','B',false);
 
 void initialize()
 {
@@ -29,7 +32,9 @@ void initialize()
             // print robot location to the brain screen
 			console.printf("X: %f\n", chassis.getPose().x);
 			console.printf("Y: %f\n",chassis.getPose().y);
-			console.printf("Theta: %f", chassis.getPose().theta);
+			console.printf("Theta: %f\n", chassis.getPose().theta);
+            // console.printf("Hook_Motor mA draw: %d\nHook_Motor power draw: %lf\nHook_Motor efficiency: %lf",hookIntakeMotor.get_current_draw(),hookIntakeMotor.get_power(),hookIntakeMotor.get_efficiency());
+            console.printf("AMT102 Reading: %d\n", enc.get_value());
 
             // log position telemetry
             lemlib::telemetrySink()->info("Chassis pose: {}", chassis.getPose());
@@ -81,6 +86,7 @@ void autonomous()
 {
     stickMotor.tare_position();
     stakeMotor.tare_position();
+    // intakeStuckTask();
 
     console.focus();
     selector.run_auton();
@@ -108,13 +114,12 @@ void opcontrol()
 
     while (true)
     {
-        // chassis.arcade(pros::E_CONTROLLER_ANALOG_LEFT_Y, pros::E_CONTROLLER_ANALOG_RIGHT_X);
-        chassis.tank(master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y), master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y));
+        chassis.arcade(master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y), master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X));
+        // chassis.tank(master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y), master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y));
         intakeControl();
         moveStakeMech();
         updateClamp();
         stickControl();
-//i like men
         pros::delay(25);
     }
 }

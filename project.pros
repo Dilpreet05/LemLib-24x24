@@ -1,7 +1,7 @@
 {
   "py/object": "pros.conductor.project.Project",
   "py/state": {
-    "project_name": "ARCADE",
+    "project_name": "SENSORTEST",
     "target": "v5",
     "templates": {
       "LemLib": {
@@ -119,6 +119,26 @@
           "src\\main.cpp"
         ],
         "version": "4.1.0"
+      },
+      "libhot-cold-asset-repo": {
+        "location": "C:\\Users\\dpyuv\\AppData\\Roaming\\PROS\\templates\\libhot-cold-asset-repo@1.0.0",
+        "metadata": {
+          "origin": "local"
+        },
+        "name": "libhot-cold-asset-repo",
+        "py/object": "pros.conductor.templates.local_template.LocalTemplate",
+        "supported_kernels": "^4.1.0",
+        "system_files": [
+          "firmware\\libhot-cold-asset-repo.a",
+          "firmware\\hot-cold-asset.mk",
+          "include\\asset.h",
+          "include\\gif-pros\\gifclass.hpp",
+          "static\\hot_chip.gif",
+          "include\\gif-pros\\gifdec.h"
+        ],
+        "target": "v5",
+        "user_files": [],
+        "version": "1.0.0"
       },
       "liblvgl": {
         "location": "C:\\Users\\dpyuv\\AppData\\Roaming\\PROS\\templates\\liblvgl@8.3.8",
@@ -326,7 +346,7 @@
       "after": "run",
       "description": "Code for 24x24 Robot",
       "icon": "pizza",
-      "slot": 2
+      "slot": 3
     },
     "use_early_access": false
   }
