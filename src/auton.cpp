@@ -136,14 +136,16 @@ void experiment(){
     chassis.setPose(-43,32,270);
 
     stickMotor.move_absolute(75,70);
-    chassis.moveToPoint(-11, 46, 1750,{.forwards=false,.minSpeed=80,.earlyExitRange=10},false);
+    chassis.moveToPoint(-11, 45, 1750,{.forwards=false,.minSpeed=80,.earlyExitRange=10},false);
     stickMotor.move(-127);
     pros::delay(125);
 
-    chassis.moveToPoint(-32, 32, 2000,{},false);
+    chassis.moveToPoint(-24, 32, 2000,{},false);
     stickMotor.move_absolute(125, 127);
 
     chassis.moveToPose(-10, 36, 270, 1500,{.forwards=false},false);
+
+    chassis.moveToPoint(-5, 36, 1500,{.forwards=false},false);
     clampDown();
     stakeMotor.move_absolute(125, 75);
 
