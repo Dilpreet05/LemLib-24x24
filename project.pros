@@ -1,7 +1,7 @@
 {
   "py/object": "pros.conductor.project.Project",
   "py/state": {
-    "project_name": "SENSORTEST",
+    "project_name": "TANK",
     "target": "v5",
     "templates": {
       "LemLib": {
@@ -346,7 +346,7 @@
       "after": "run",
       "description": "Code for 24x24 Robot",
       "icon": "pizza",
-      "slot": 3
+      "slot": 1
     },
     "use_early_access": false
   }

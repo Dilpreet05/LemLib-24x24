@@ -1,4 +1,4 @@
-#include "main.h" // IWYU pragma: keep
+#include "api.h" // IWYU pragma: keep
 
 // inline bool isRunningAuton = false;
 
@@ -30,6 +30,7 @@ void intakeStuckTask();
 
 void redTopRush();
 void blueBottomRush();
+void experiment();
 
-/* 1 represents red, -1 represents blue */
-void bottomRush(int color);
+inline bool intakeStuckTaskOn = false;
+extern pros::Task intake_stuck_task;

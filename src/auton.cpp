@@ -1,6 +1,5 @@
 #include "lemlib/chassis/chassis.hpp"
 #include "main.h" // IWYU pragma: keep
-#include "pros/device.hpp"
 #include "pros/misc.hpp"
 #include "pros/rtos.hpp"
 ASSET(SkillsPath_1_txt);
@@ -112,24 +111,85 @@ void findStartingPose(){
     chassis.setPose(0,48,270);
 }
 
-void intakeStuckTask(){
 
-    pros::Task intakeStuckTask([&](){
+pros::Task intake_stuck_task([]{
 
-        while(pros::competition::is_autonomous()){
-            if(hookIntakeMotor.get_efficiency()<5 && hookIntakeMotor.get_actual_velocity()<0){
-                outtake();
-                pros::delay(500);
-                // stopIntake();
-                intake();
-            }
-            pros::delay(50);
+    while(true){
+        if (pros::Task::current().notify_take(true, 20)) {
+            intakeStuckTaskOn = !intakeStuckTaskOn;
         }
 
-    });
+        if(intakeStuckTaskOn && hookIntakeMotor.get_efficiency()<5 && hookIntakeMotor.get_actual_velocity()<0){
+            outtake();
+            pros::delay(250);
+            intake();
+        }
+        pros::delay(20);
+    }
+
+});
+
+
+/* match autons */
+
+void experiment(){
+    chassis.setPose(-43,32,270);
+
+    stickMotor.move_absolute(75,70);
+    chassis.moveToPoint(-11, 46, 1750,{.forwards=false,.minSpeed=80,.earlyExitRange=10},false);
+    stickMotor.move(-127);
+    pros::delay(125);
+
+    chassis.moveToPoint(-32, 32, 2000,{},false);
+    stickMotor.move_absolute(125, 127);
+
+    chassis.moveToPose(-10, 36, 270, 1500,{.forwards=false},false);
+    clampDown();
+    stakeMotor.move_absolute(125, 75);
+
+    chassis.moveToPoint(-48, 48, 3000,{});
+    pros::delay(500);
+    intake();
+
+    pros::delay(1500);
+
+    chassis.moveToPoint(-24, 24, 1500,{.forwards=false},false);
+    clampUp();
+
+    chassis.moveToPoint(-47,24,2500,{});
+    stopIntake();
+
+
+    chassis.turnToPoint(-47, 0, 1250,{.forwards=false,.maxSpeed=90},false);
+    chassis.moveToPoint(-47, -13, 2500,{.forwards=false,.maxSpeed=105},false);
+    clampDown();
+    pros::delay(100);
+
+    chassis.turnToPoint(-28, -5, 1750,{.forwards=false});
+    chassis.moveToPoint(-28,-5,2500,{.forwards=false},false);
+
+
+    chassis.turnToPoint(-56, 5, 1250);
+    chassis.moveToPoint(-56, 5, 2500);
+    intake();
+
+    chassis.moveToPoint(-58, 7,1000);
+
+    pros::delay(1000);
+
+    
+
+    chassis.moveToPoint(-48, 0, 2000,{.forwards=false});
+    
+    chassis.turnToHeading(0, 750);
+    // clampUp();
+    stopIntake();
+    chassis.turnToHeading(45, 750);
+    chassis.moveToPoint(-24, 3, 1750,{.maxSpeed=80});
+
+    stopIntake();
 
 }
-/* match autons */
 
 void redTopRush(){
 
@@ -267,21 +327,25 @@ void blueBottomRush(){
 
 
 void skills_pp(){
-    chassis.setPose(-49,32,270);
-    chassis.moveToPose(-24, 48, 220, 2500,{.forwards=false,.lead=.3,.minSpeed=60,.earlyExitRange=6});
-    chassis.waitUntilDone();
+    chassis.setPose(-52,32,270);
+
+    stickMotor.move_absolute(125, 127);
+
+    // chassis.moveToPose(-24, 48, 225, 2500,{.forwards=false,.lead=.3,.minSpeed=60,.earlyExitRange=6},false);
+    chassis.moveToPoint(-24, 48, 2500,{.forwards=false},false);
     clampDown();
     stakeMotor.move_absolute(200, 70);
 
-    chassis.turnToHeading(45, 750);
+    chassis.turnToHeading(70, 750);
+    intake();
     chassis.follow(SkillsPath_1_txt, 12, 20000);
 }
 
 void skills(){
 
-    chassis.setPose(-49,32,270);
+    chassis.setPose(-45,32,270);
 
-    chassis.moveToPose(-24, 48, 220, 2500,{.forwards=false,.lead=.3,.minSpeed=60,.earlyExitRange=6});
+    chassis.moveToPose(-24, 48, 225, 2500,{.forwards=false,.lead=.3,.minSpeed=60,.earlyExitRange=6});
     chassis.waitUntilDone();
     clampDown();
     stakeMotor.move_absolute(200, 70);
