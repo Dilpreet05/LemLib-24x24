@@ -136,34 +136,32 @@ void experiment(){
     chassis.setPose(-43,32,270);
 
     stickMotor.move_absolute(75,70);
-    chassis.moveToPoint(-11, 45, 1750,{.forwards=false,.minSpeed=80,.earlyExitRange=10},false);
+    chassis.moveToPoint(-11, 46, 1750,{.forwards=false,.minSpeed=80,.earlyExitRange=10},false);
     stickMotor.move(-127);
     pros::delay(125);
 
-    chassis.moveToPoint(-24, 32, 2000,{},false);
+    chassis.moveToPoint(-32, 32, 2000,{},false);
     stickMotor.move_absolute(125, 127);
 
     chassis.moveToPose(-10, 36, 270, 1500,{.forwards=false},false);
-
-    chassis.moveToPoint(-5, 36, 1500,{.forwards=false},false);
     clampDown();
     stakeMotor.move_absolute(125, 75);
 
-    chassis.moveToPoint(-48, 48, 3000,{});
+    chassis.moveToPoint(-46, 46, 3000,{});
     pros::delay(500);
     intake();
 
-    pros::delay(1500);
+    pros::delay(2500);
 
-    chassis.moveToPoint(-24, 24, 1500,{.forwards=false},false);
+    chassis.moveToPoint(-30, 30, 1500,{.forwards=false},false);
     clampUp();
 
     chassis.moveToPoint(-47,24,2500,{});
     stopIntake();
 
 
-    chassis.turnToPoint(-47, 0, 1250,{.forwards=false,.maxSpeed=90},false);
-    chassis.moveToPoint(-47, -13, 2500,{.forwards=false,.maxSpeed=105},false);
+    chassis.turnToPoint(-46, 0, 1250,{.forwards=false,.maxSpeed=90},false);
+    chassis.moveToPoint(-46, -13, 2500,{.forwards=false,.maxSpeed=105},false);
     clampDown();
     pros::delay(100);
 
@@ -175,13 +173,13 @@ void experiment(){
     chassis.moveToPoint(-56, 5, 2500);
     intake();
 
-    chassis.moveToPoint(-58, 7,1000);
+    // chassis.moveToPoint(-58, 7,1000);
 
-    pros::delay(1000);
+    pros::delay(1500);
 
     
 
-    chassis.moveToPoint(-48, 0, 2000,{.forwards=false});
+    chassis.moveToPoint(-48, -5, 2000,{.forwards=false});
     
     chassis.turnToHeading(0, 750);
     // clampUp();
