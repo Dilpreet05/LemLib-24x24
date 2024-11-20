@@ -30,6 +30,7 @@ void intakeStuckTask();
 
 void redTopRush();
 void blueBottomRush();
+void blueTopRush();
 void experiment();
 
 inline bool intakeStuckTaskOn = false;

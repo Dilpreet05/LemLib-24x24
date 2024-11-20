@@ -188,7 +188,6 @@ void experiment(){
     chassis.moveToPoint(-24, 3, 1750,{.maxSpeed=80});
 
     stopIntake();
-
 }
 
 void redTopRush(){
@@ -250,6 +249,64 @@ void redTopRush(){
     stopIntake();
 
 
+}
+
+void blueTopRush(){
+    chassis.setPose(-43,32,270);
+
+    stickMotor.move_absolute(75,70);
+    chassis.moveToPoint(-11, 46, 1750,{.forwards=false,.minSpeed=80,.earlyExitRange=10},false);
+    stickMotor.move(-127);
+    pros::delay(125);
+
+    chassis.moveToPoint(-32, 32, 2000,{},false);
+    stickMotor.move_absolute(125, 127);
+
+    chassis.moveToPose(-10, 36, 270, 1500,{.forwards=false},false);
+    clampDown();
+    stakeMotor.move_absolute(125, 75);
+
+    chassis.moveToPoint(-46, 46, 3000,{});
+    pros::delay(500);
+    intake();
+
+    pros::delay(2500);
+
+    chassis.moveToPoint(-30, 30, 1500,{.forwards=false},false);
+    clampUp();
+
+    chassis.moveToPoint(-47,24,2500,{});
+    stopIntake();
+
+
+    chassis.turnToPoint(-46, 0, 1250,{.forwards=false,.maxSpeed=90},false);
+    chassis.moveToPoint(-46, -13, 2500,{.forwards=false,.maxSpeed=105},false);
+    clampDown();
+    pros::delay(100);
+
+    chassis.turnToPoint(-28, -5, 1750,{.forwards=false});
+    chassis.moveToPoint(-28,-5,2500,{.forwards=false},false);
+
+
+    chassis.turnToPoint(-56, 5, 1250);
+    chassis.moveToPoint(-56, 5, 2500);
+    intake();
+
+    // chassis.moveToPoint(-58, 7,1000);
+
+    pros::delay(1500);
+
+    
+
+    chassis.moveToPoint(-48, -5, 2000,{.forwards=false});
+    
+    chassis.turnToHeading(0, 750);
+    // clampUp();
+    stopIntake();
+    chassis.turnToHeading(45, 750);
+    chassis.moveToPoint(-24, 3, 1750,{.maxSpeed=80});
+
+    stopIntake();
 }
 
 void blueBottomRush(){
