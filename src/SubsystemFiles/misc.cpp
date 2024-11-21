@@ -7,8 +7,8 @@ rd::Selector selector({
     
     {"Red Left", &redTopRush},
     {"Blue Left", &blueBottomRush},
+    {"Blue Right", &blueTopRush},
     {"Experimental", &experiment},
-    {"Blue Right", &blueTopRush}
     
 });
 

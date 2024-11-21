@@ -21,7 +21,7 @@ void tuneLinearPID()
 }
 
 /* Subsystems */
-int intakeSpeed = 127;
+int intakeSpeed = 115;
 
 void clampDown()
 {
@@ -272,8 +272,9 @@ void blueTopRush(){
 
     pros::delay(2500);
 
-    chassis.moveToPoint(-30, 30, 1500,{.forwards=false},false);
+    chassis.moveToPoint(-50, 58, 1500,{.forwards=false},false);
     clampUp();
+    chassis.moveToPoint(-62.321, 58.453, 1500,{.forwards=false},false);
 
     chassis.moveToPoint(-47,24,2500,{});
     stopIntake();
@@ -302,10 +303,11 @@ void blueTopRush(){
     
     chassis.turnToHeading(0, 750);
     // clampUp();
-    stopIntake();
+    // stopIntake();
     chassis.turnToHeading(45, 750);
     chassis.moveToPoint(-24, 3, 1750,{.maxSpeed=80});
 
+    pros::delay(1000);
     stopIntake();
 }
 
