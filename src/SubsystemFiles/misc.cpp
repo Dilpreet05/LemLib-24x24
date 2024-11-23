@@ -80,3 +80,4 @@ bool ring_is_blue()
     ring_optic_sensor.set_led_pwm(100);
     return ring_optic_sensor.get_hue() > 200;
 }
+

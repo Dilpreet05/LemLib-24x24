@@ -239,3 +239,21 @@ lemlib::Chassis chassis(DRIVETRAIN,        // drivetrain settings
  ** All other competition modes are blocked by initialize; it is recommended
  ** to keep execution time for this mode under a few seconds.
  */
+
+bool chassis_reversed = false;
+void chassisControl(){
+    if (!chassis_reversed)
+    {
+        chassis.tank(master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y), master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y));
+        master.set_text(0,0,"Forward");
+    } 
+    else
+    {
+        chassis.tank(-master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y), -master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y));
+        master.set_text(0,0,"Reversed");
+    }
+    if (master.get_digital_new_press(DIGITAL_LEFT))
+    {
+        chassis_reversed = !chassis_reversed;
+    }
+}

@@ -14,3 +14,5 @@ extern lemlib::Drivetrain DRIVETRAIN;
 
 extern pros::MotorGroup leftMotors;
 extern pros::MotorGroup rightMotors;
+
+void chassisControl();

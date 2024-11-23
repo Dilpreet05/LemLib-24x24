@@ -4,19 +4,12 @@
 pros::adi::DigitalOut leftClampPiston('D', LOW);
 pros::adi::DigitalOut rightClampPiston('C', LOW);
 
+bool isClampDown = false;
 void updateClamp()
-{
-    // Press L1 to clamp down
-    if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L1))
+{   
+    if (master.get_digital_new_press(DIGITAL_DOWN))
     {
-        leftClampPiston.set_value(1);
-        rightClampPiston.set_value(1);
-    }
-
-    // Press L2 to clamp up
-    else if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L2))
-    {
-        leftClampPiston.set_value(0);
-        rightClampPiston.set_value(0);
+        leftClampPiston.set_value(isClampDown ? 0 : 1);
+        rightClampPiston.set_value(isClampDown ? 0 : 1);
     }
 }
