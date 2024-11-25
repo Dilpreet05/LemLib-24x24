@@ -11,5 +11,6 @@ void updateClamp()
     {
         leftClampPiston.set_value(isClampDown ? 0 : 1);
         rightClampPiston.set_value(isClampDown ? 0 : 1);
+        isClampDown = !isClampDown;
     }
 }

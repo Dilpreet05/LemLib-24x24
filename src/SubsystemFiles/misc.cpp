@@ -5,10 +5,13 @@
 rd::Selector selector({
     {"Skills", &skills_pp},
     
-    {"Red Left", &redTopRush},
-    {"Blue Left", &blueBottomRush},
-    {"Blue Right", &blueTopRush},
-    {"Experimental", &experiment},
+
+    {"Red K", &experiment},
+    {"Blue K", &blueTopRush},
+    {"Red D", &redTopRush},
+    {"Blue D", &blueBottomRush},
+
+
     
 });
 
