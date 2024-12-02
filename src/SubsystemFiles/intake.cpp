@@ -6,25 +6,21 @@
 pros::Motor flexWheelIntakeMotor(20, pros::MotorGearset::green, pros::v5::MotorUnits::degrees);
 pros::Motor hookIntakeMotor(12, pros::MotorGearset::red, pros::v5::MotorUnits::degrees);
 
-int fast_hook_intake_speed = 127;
-int slow_hook_intake_speed = 118;
-int super_slow_intake_speed = 60;
-int hook_intake_speed = fast_hook_intake_speed;
 
 void intakeControl()
 {
     // Outtake while holding R2
     if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R2))
     {
-        hookIntakeMotor.move(hook_intake_speed);
-        flexWheelIntakeMotor.move(127);
+        hookIntakeMotor.move(intakeSpeed);
+        flexWheelIntakeMotor.move(intakeSpeed);
     }
 
     // Intake while holding R1
     else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R1) )
     {
-        hookIntakeMotor.move(-hook_intake_speed);
-        flexWheelIntakeMotor.move(-127);
+        hookIntakeMotor.move(-intakeSpeed);
+        flexWheelIntakeMotor.move(-intakeSpeed);
     }
 
     // Stop otherwise
@@ -34,14 +30,6 @@ void intakeControl()
         flexWheelIntakeMotor.brake();
     }
 
-    // Swap the hook intake speed
-    if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A))
-    {
-        hook_intake_speed = (hook_intake_speed == fast_hook_intake_speed) ? slow_hook_intake_speed : fast_hook_intake_speed;
-    }
-    if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X)){
-        hook_intake_speed = super_slow_intake_speed;
-    }
 }
 
 void setIntakeBrakes()
@@ -52,3 +40,54 @@ void setIntakeBrakes()
 }
 
 /* End of Intake Code */
+
+
+pros::Task colorSorting{[]{
+
+    intakeColorSensor.set_led_pwm(100);
+
+
+
+    
+    while(true){
+
+
+        /* when the specified color */
+        if(sortColor==1){
+
+            isLoaded = (intakeColorSensor.get_hue()>5 && intakeColorSensor.get_hue()<30) ? true:false; /* if the ring is red, prepare to get rid of it */
+
+        }else if(sortColor==-1){
+
+            isLoaded = (intakeColorSensor.get_hue()>185 && intakeColorSensor.get_hue()<215) ? true:false; /*  if the ring is blue, prepare to get rid of it */
+
+        }
+
+
+        /* if the motors current draw is massive, it's probably stuck */
+        if(hookIntakeMotor.get_current_draw()>2300){
+            isStuck = true;
+        }
+
+
+
+        if((isLoaded && hookIntakeMotor.get_actual_velocity()>50) || (isStuck) ){
+
+            /* reverse intake for specified time. if intake is stuck then reverse for longer */
+            hookIntakeMotor.move(intakeSpeed);
+            pros::delay(125 + 125*(isStuck*2));
+            hookIntakeMotor.move(-intakeSpeed);
+
+
+            /* reset */
+            isStuck = false;
+            isLoaded=false;
+        }
+
+        pros::delay(20);
+
+    }
+
+
+    
+}};

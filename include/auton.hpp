@@ -23,15 +23,14 @@ void liftMove(int);
 void stickMove(int n);
 
 void skills();
-void skills_pp();
 void findStartingPose();
 void intakeStuckTask();
 
 
-void redTopRush();
-void blueBottomRush();
-void blueTopRush();
-void experiment();
+void red_D();
+void blue_D();
+void blue_K();
+void red_K();
 
 inline bool intakeStuckTaskOn = false;
 extern pros::Task intake_stuck_task;

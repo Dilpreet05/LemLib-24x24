@@ -3,13 +3,14 @@
 
 //Auton Selector
 rd::Selector selector({
-    {"Skills", &skills_pp},
+    {"Skills", &skills},
     
 
-    {"Red K", &experiment},
-    {"Blue K", &blueTopRush},
-    {"Red D", &redTopRush},
-    {"Blue D", &blueBottomRush},
+    {"Red K", &red_K},
+    {"Blue K", &blue_K},
+    {"Red D", &red_D},
+    {"Blue D", &blue_D},
+    {"Intake Only", &intake},
 
 
     

@@ -4,7 +4,6 @@
 pros::adi::DigitalOut leftClampPiston('D', LOW);
 pros::adi::DigitalOut rightClampPiston('C', LOW);
 
-bool isClampDown = false;
 void updateClamp()
 {   
     if (master.get_digital_new_press(DIGITAL_DOWN))

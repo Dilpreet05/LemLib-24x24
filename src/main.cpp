@@ -2,8 +2,10 @@
 #include "liblvgl/llemu.hpp"
 #include "liblvgl/lvgl.h" // IWYU pragma: keep
 #include "liblvgl/llemu.h" // IWYU pragma: keep
+#include "pros/abstract_motor.hpp"
 #include "pros/adi.hpp"
 #include "pros/misc.h"
+#include "pros/motors.h"
 
 // #include "asset.h"
 
@@ -34,7 +36,6 @@ void initialize()
 			console.printf("Theta: %f\n", chassis.getPose().theta);
             console.printf("Hook_Motor mA draw: %d\nHook_Motor power draw: %lf\nHook_Motor efficiency: %lf",hookIntakeMotor.get_current_draw(),hookIntakeMotor.get_power(),hookIntakeMotor.get_efficiency());
 
-            console.printf("\nintake_stuck_task isOn: %s\n", (intakeStuckTaskOn) ? "true":"false");
 
             // log position telemetry
             lemlib::telemetrySink()->info("Chassis pose: {}", chassis.getPose());
@@ -84,10 +85,10 @@ void competition_initialize() {}
  */
 void autonomous()
 {
-    // intake_stuck_task.notify();
+    intake_stuck_task.suspend();
     stickMotor.tare_position();
     stakeMotor.tare_position();
-    // intakeStuckTask();
+
 
     console.focus();
     selector.run_auton();
@@ -111,10 +112,7 @@ void autonomous()
 
 void opcontrol()
 {
-
-    // intake_stuck_task.notify();
-    intakeStuckTaskOn=false;
-    intake_stuck_task.suspend();
+    chassis.setBrakeMode(pros::E_MOTOR_BRAKE_BRAKE);
     while (true)
     {
         chassisControl();
