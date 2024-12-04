@@ -136,13 +136,13 @@ void red_K(){ // red K
     chassis.setPose(-43,32,270);
 
 
-    /** Move our MOGO rush stick upwards slighly to 75deg @ 70RPM => Rush towards the mobile goal using the shortest path */
+    /** Move our MOGO rush stick upwards slighly to 75deg @ 70RPM => Rush towards the MOGO using the shortest path */
     stickMotor.move_absolute(75,70);
     chassis.moveToPoint(-11, 46, 1750,{.forwards=false,.minSpeed=80,.earlyExitRange=10},false);
 
     /** Once we reach proper position, slam the MOGO rush stick back down at max speed. */
     stickMotor.move(-127);
-    pros::delay(125); // lets the goal become steady before next step.
+    pros::delay(125); // lets the MOGO become steady before next step.
 
     /** Drive backwards to take the MOGO away from the centerline & put it onto our side */
     chassis.moveToPoint(-32, 32, 2000,{},false);
@@ -266,7 +266,7 @@ void blue_K(){ // blue K
     /** Set our robots position to the starting point on the field */
     chassis.setPose(-43,32,270);
 
-    /** Move our MOGO rush stick upwards slighly to 75deg @ 70RPM => Rush towards the mobile goal using the shortest path */
+    /** Move our MOGO rush stick upwards slighly to 75deg @ 70RPM => Rush towards the MOGO using the shortest path */
     stickMotor.move_absolute(75,70);
     chassis.moveToPoint(-11, 46, 1750,{.forwards=false,.minSpeed=80,.earlyExitRange=10},false);
 
@@ -280,7 +280,7 @@ void blue_K(){ // blue K
 
     /** A curving motion used to align the robot to the flat edge of the MOGO,  and then drive into it with out clamp. */
     chassis.moveToPose(-10, 36, 270, 1500,{.forwards=false},false);
-    clampDown(); // latch goal
+    clampDown(); // latch MOGO
     stakeMotor.move_absolute(125, 75); // expand wall stake mech.
 
     /** Grabs the ring @ position (-48,48) */
@@ -420,8 +420,8 @@ void skills(){
     stakeMotor.move_absolute(200, 70); // This moves our wall stake mechanism out of the way. This lets us intake rings ont the MOGO.
 
 
-    clampDown(); // Clamp the goal.
-    pros::delay(250); // Let the goal settle into clamp before motion. Without the delay the MOGO will fling out sometimes.
+    clampDown(); // Clamp the MOGO.
+    pros::delay(250); // Let the MOGO settle into clamp before motion. Without the delay the MOGO will fling out sometimes.
 
     /** Driving towards our first ring at position (0,48) */
     chassis.turnToPoint(0, 48, 750);
@@ -471,7 +471,7 @@ void skills(){
     chassis.turnToPoint(0, 48, 750,{.forwards=false});
     chassis.moveToPoint(0, 48, 3000,{.forwards=false,.maxSpeed=50},false);
 
-    /** Drive into the second mobile goal on the opposite side of the field and posses it */
+    /** Drive into the second MOGO on the opposite side of the field and posses it */
     chassis.turnToPoint(24, 24, 750,{.forwards=false});
     chassis.moveToPoint(22, 26, 1750,{.forwards=false},false);
     clampDown();
@@ -493,7 +493,7 @@ void skills(){
     chassis.moveToPoint(42, 46, 1750,{.maxSpeed=70});
     pros::delay(2500); // larger delay since this ring is inconsistant sometimes
 
-    /** reverse into the corner and drop off the mobile goal */
+    /** reverse into the corner and drop off the MOGO */
     chassis.turnToPoint(54, 62, 750,{.forwards=false});
     chassis.moveToPoint(54, 62, 1750,{.forwards=false,.minSpeed=50});
     clampUp();
@@ -504,6 +504,6 @@ void skills(){
     chassis.moveToPoint(59, 57, 1750,{.forwards=false,.minSpeed=50});
     chassis.moveToPoint(54, 62, 1750,{.forwards=false,.minSpeed=50});
 
-    /** Move away from any goals or rings */
+    /** Move away from any MOGOs or rings */
     chassis.moveToPoint(48, 48, 1750); 
 } // End skills
