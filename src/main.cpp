@@ -1,4 +1,5 @@
 #include "main.h"
+#include "lemlib/timer.hpp"
 #include "liblvgl/llemu.hpp"
 #include "liblvgl/lvgl.h" // IWYU pragma: keep
 #include "liblvgl/llemu.h" // IWYU pragma: keep
@@ -27,7 +28,7 @@ void initialize()
     pros::delay(250);
 
     selector.focus();
-
+    
     pros::Task screenTask([&]() {
         while (true) {
             // print robot location to the brain screen

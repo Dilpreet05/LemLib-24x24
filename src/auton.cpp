@@ -191,12 +191,12 @@ void red_K(){ // red K
     chassis.moveToPoint(-48, -5, 2000,{.forwards=false});
     chassis.turnToHeading(0, 750);
 
-    stopIntake(); // prevent intake overuse
 
     /** drive to the ladder for the AWP Ladder touch */
     chassis.turnToHeading(45, 750);
     chassis.moveToPoint(-24, 3, 1750,{.maxSpeed=80});
 
+    pros::delay(1000);
     stopIntake();
 }
 
@@ -262,63 +262,71 @@ void red_D(){
 }
 
 void blue_K(){ // blue K
+
+    /** Set our robots position to the starting point on the field */
     chassis.setPose(-43,32,270);
 
+    /** Move our MOGO rush stick upwards slighly to 75deg @ 70RPM => Rush towards the mobile goal using the shortest path */
     stickMotor.move_absolute(75,70);
     chassis.moveToPoint(-11, 46, 1750,{.forwards=false,.minSpeed=80,.earlyExitRange=10},false);
+
+    /** Once we reach proper position, slam the MOGO rush stick back down at max speed. */
     stickMotor.move(-127);
     pros::delay(125);
 
+    /** Drive backwards to take the MOGO away from the centerline & put it onto our side */
     chassis.moveToPoint(-32, 32, 2000,{},false);
     stickMotor.move_absolute(125, 127);
 
+    /** A curving motion used to align the robot to the flat edge of the MOGO,  and then drive into it with out clamp. */
     chassis.moveToPose(-10, 36, 270, 1500,{.forwards=false},false);
-    clampDown();
-    stakeMotor.move_absolute(125, 75);
+    clampDown(); // latch goal
+    stakeMotor.move_absolute(125, 75); // expand wall stake mech.
 
+    /** Grabs the ring @ position (-48,48) */
     chassis.moveToPoint(-46, 46, 3000,{});
     pros::delay(500);
     intake();
 
-    pros::delay(2500);
+    pros::delay(2500); // wait for ring to intake
 
+    /** drive to the MOGO drop off point, into the positive corner */
     chassis.moveToPoint(-50, 58, 1500,{.forwards=false},false);
-    clampUp();
-    chassis.moveToPoint(-62.321, 58.453, 1500,{.forwards=false},false);
+    clampUp(); // release MOGO
+    chassis.moveToPoint(-62.321, 58.453, 1500,{.forwards=false},false); // push MOGO into corner
 
+    /** Drive to (-47,24) aligns us to ourside MOGO located at (-48,0) */
     chassis.moveToPoint(-47,24,2500,{});
-    stopIntake();
+    stopIntake(); // prevent intake overuse
 
-
+    /** Grabs the MOGO at (-48,0) */
     chassis.turnToPoint(-46, 0, 1250,{.forwards=false,.maxSpeed=90},false);
     chassis.moveToPoint(-46, -13, 2500,{.forwards=false,.maxSpeed=105},false);
     clampDown();
     pros::delay(100);
 
+    /** Drive to a point under the ladder, this is so we can better align for the next step */
     chassis.turnToPoint(-28, -5, 1750,{.forwards=false});
     chassis.moveToPoint(-28,-5,2500,{.forwards=false},false);
 
-
+    /** Intake the ring located at (-60,0) */
     chassis.turnToPoint(-56, 5, 1250);
     chassis.moveToPoint(-56, 5, 2500);
     intake();
 
-    // chassis.moveToPoint(-58, 7,1000);
-
-    pros::delay(1500);
+    pros::delay(1500); // wait for ring to intake
 
     
-
+    /** back up slightly & align to the ladder*/
     chassis.moveToPoint(-48, -5, 2000,{.forwards=false});
-    
     chassis.turnToHeading(0, 750);
-    // clampUp();
-    // stopIntake();
+
+    /** drive to the ladder for the AWP Ladder touch */
     chassis.turnToHeading(45, 750);
     chassis.moveToPoint(-24, 3, 1750,{.maxSpeed=80});
 
     pros::delay(1000);
-    stopIntake();
+    stopIntake(); // prevent intake overuse when we finish auton before 30s
 }
 
 void blue_D(){
