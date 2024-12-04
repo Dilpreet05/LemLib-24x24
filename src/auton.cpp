@@ -327,7 +327,8 @@ void blue_K(){ // blue K
 
     pros::delay(1000);
     stopIntake(); // prevent intake overuse when we finish auton before 30s
-}
+
+} // end of auton
 
 void blue_D(){
 
@@ -405,112 +406,104 @@ void blue_D(){
 
 
 void skills(){
+
+    // Set global positoin for our odometry
     chassis.setPose(-52,32,270);
 
-    // chassis.moveToPose(-24, 48, 225, 2500,{.forwards=false,.lead=.3,.minSpeed=60,.earlyExitRange=6});
+    /** Move to a position that allows us to clamp the MOGO at a better angle while also not affecting ring positionings */
     chassis.moveToPoint(-40, 32, 1500,{.forwards=false,.maxSpeed=60});
     stickMotor.move_absolute(125, 70);
+
+    /** Drive towards the MOGO & Clamp onto it */
     chassis.turnToPoint(-24, 48, 750,{.forwards=false});
     chassis.moveToPoint(-24, 48, 1750,{.forwards=false},false);
-    stakeMotor.move_absolute(200, 70);
+    stakeMotor.move_absolute(200, 70); // This moves our wall stake mechanism out of the way. This lets us intake rings ont the MOGO.
 
-    clampDown();
 
-    pros::delay(250);
+    clampDown(); // Clamp the goal.
+    pros::delay(250); // Let the goal settle into clamp before motion. Without the delay the MOGO will fling out sometimes.
 
+    /** Driving towards our first ring at position (0,48) */
     chassis.turnToPoint(0, 48, 750);
     chassis.moveToPoint(0, 48, 1750);
-    intake();
-    pros::delay(1750);
+    intake(); // Intake rings
+    pros::delay(1750); // Delay once we reach the point where the ring is at, 
+                                    // allows us to consistantly intake rings even if our flex wheels are dirty
 
+    /** back up from the rings */
     chassis.moveToPoint(-18, 48, 1000,{.forwards=false});
 
-
+    /** Drive into the ring stack at (0,60), The reason we reversed in the previous step is to avoid disturbing the state of the ring stack. */
     chassis.turnToPoint(0, 58, 750);
     chassis.moveToPoint(0, 58, 1250);
-    pros::delay(1750);
+    pros::delay(1750); // delay to intake ring
 
+    /** Reverse once again for alignment */
     chassis.moveToPoint(-18, 48, 1250,{.forwards=false});
 
+    /** Intake the single red ring at (-24,24) */
     chassis.turnToPoint(-24,-24,750);
     chassis.moveToPoint(-24, 24, 1750,{.maxSpeed=60});
+    pros::delay(1750); // delay to intake ring
 
-    pros::delay(1750);
-
+    /** Intake ring at position (-48,48) */
     chassis.turnToPoint(-48, 48, 750);
     chassis.moveToPoint(-48, 48, 1750);
+    pros::delay(750); // shorter delay that normal since our next motion will drive into the ring more
 
-    pros::delay(750);
-
+    /** Intake the corner ring */
     chassis.moveToPoint(-55, 55, 1750);
-    // chassis.moveToPose(-58, 58, 0, 2500,{.lead=.3,.minSpeed=40,.earlyExitRange=3});
-    pros::delay(1750);
+    pros::delay(1750); // delay to intake ring
 
+    /** Reverse in order to spin without hitting the walls */
     chassis.moveToPoint(-48, 48, 1250,{.forwards=false});
-    // pros::delay(1250);
-    // chassis.moveToPoint(-60, 60, 1750);
-    // pros::delay(1250);
-    // chassis.moveToPoint(-48, 48, 1250,{.forwards=false});
 
-
+    /** reverse into the corner and drop off the MOGO */
     chassis.turnToPoint(-58, 58, 750,{.forwards=false});
     chassis.moveToPoint(-58, 58, 1750,{.forwards=false},false);
 
-    clampUp();
-    pros::delay(250);
-    stopIntake();
+    clampUp(); // let go of MOGO
+    pros::delay(250); // delay to settle
+    stopIntake(); // prevent the intake from overuse
 
+    /** Move away from the corner and towards the center of the field */
     chassis.moveToPoint(-48, 48, 1750);
     chassis.turnToPoint(0, 48, 750,{.forwards=false});
     chassis.moveToPoint(0, 48, 3000,{.forwards=false,.maxSpeed=50},false);
 
-    // chassis.turnToPoint(21, 21, 750,{.forwards=false});
-    // chassis.moveToPoint(21, 21, 1750,{.forwards=false,.maxSpeed=50},false);
-    // chassis.moveToPose(24, 24, 300, 2500,{.forwards=false,.minSpeed=50},false);
-
-    // chassis.turnToPoint(0, 36, 750,{.forwards=false});
-    // chassis.moveToPoint(0, 36, 1750,{.forwards=false});
-    // chassis.setPose(0,48,270);
-
+    /** Drive into the second mobile goal on the opposite side of the field and posses it */
     chassis.turnToPoint(24, 24, 750,{.forwards=false});
     chassis.moveToPoint(22, 26, 1750,{.forwards=false},false);
-
-
-    // chassis.waitUntilDone();
-    // chassis.setPose(24,24,300);
-
     clampDown();
-    pros::delay(250);
+    pros::delay(250); // let MOGO settle
 
+    /** Turn to the first ring at (24,48) and intake */
     chassis.turnToPoint(18, 50, 750);
     chassis.moveToPoint(18, 50, 1750,{.maxSpeed=70});
     intake();
-    pros::delay(1750);
+    pros::delay(1750); // delay to intake ring
 
-
+    /** Intake ring at position (48,24) */
     chassis.turnToPoint(42, 26, 750);
     chassis.moveToPoint(42, 26, 1750,{.maxSpeed=70});
-    pros::delay(1750);
+    pros::delay(1750); // delay for intake ring
 
+    /** Intake ring at (48,48) */
     chassis.turnToPoint(42, 46, 750);
     chassis.moveToPoint(42, 46, 1750,{.maxSpeed=70});
-    pros::delay(2500);
+    pros::delay(2500); // larger delay since this ring is inconsistant sometimes
 
+    /** reverse into the corner and drop off the mobile goal */
     chassis.turnToPoint(54, 62, 750,{.forwards=false});
     chassis.moveToPoint(54, 62, 1750,{.forwards=false,.minSpeed=50});
-
     clampUp();
     pros::delay(500);
     stopIntake();
 
+    /** reverse and ram the MOGO to ensure its in the corner*/
     chassis.moveToPoint(59, 57, 1750,{.forwards=false,.minSpeed=50});
     chassis.moveToPoint(54, 62, 1750,{.forwards=false,.minSpeed=50});
 
-
-    chassis.moveToPoint(48, 48, 1750);
-
-
-
-    // chassis.moveToPoint(-48,48,1250);
-
-}
+    /** Move away from any goals or rings */
+    chassis.moveToPoint(48, 48, 1750); 
+} // End skills
