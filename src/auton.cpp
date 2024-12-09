@@ -149,7 +149,7 @@ void red_K(){ // red K
     stickMotor.move_absolute(125, 127); // put stick back up after finished getting the MOGO.
 
     /** A curving motion used to align the robot to the flat edge of the MOGO,  and then drive into it with out clamp. */
-    chassis.moveToPose(-10, 36, 270, 1500,{.forwards=false},false);
+    chassis.moveToPose(-8, 36, 270, 1500,{.forwards=false},false);
     clampDown(); // clamp onto MOGO
     stakeMotor.move_absolute(125, 75); // move our high stake mech out of the way
 
@@ -184,7 +184,7 @@ void red_K(){ // red K
     intake();
 
 
-    pros::delay(1500); // wait until the ring is in the intake
+    pros::delay(2500); // wait until the ring is in the intake
 
     
     /** back up slightly & align to the ladder*/
@@ -194,9 +194,9 @@ void red_K(){ // red K
 
     /** drive to the ladder for the AWP Ladder touch */
     chassis.turnToHeading(45, 750);
-    chassis.moveToPoint(-24, 3, 1750,{.maxSpeed=80});
+    chassis.moveToPoint(-24, 3, 1750,{.maxSpeed=80},false);
 
-    pros::delay(1000);
+    pros::delay(2500);
     stopIntake();
 }
 
@@ -212,7 +212,7 @@ void red_D(){
     chassis.moveToPoint(-32, 32, 2000,{},false);
     stickMotor.move_absolute(125, 127);
 
-    chassis.moveToPose(-10, 36, 270, 1500,{.forwards=false},false);
+    chassis.moveToPose(-8, 36, 270, 1500,{.forwards=false,.lead=.7},false);
     clampDown();
     stakeMotor.move_absolute(125, 75);
 
@@ -222,7 +222,7 @@ void red_D(){
 
     pros::delay(2500);
 
-    chassis.moveToPoint(-24, 24, 1500,{.forwards=false},false);
+    chassis.moveToPoint(-40, 40, 1500,{.forwards=false},false);
     clampUp();
 
     chassis.moveToPoint(-47,24,2500,{});
@@ -279,7 +279,7 @@ void blue_K(){ // blue K
     stickMotor.move_absolute(125, 127);
 
     /** A curving motion used to align the robot to the flat edge of the MOGO,  and then drive into it with out clamp. */
-    chassis.moveToPose(-10, 36, 270, 1500,{.forwards=false},false);
+    chassis.moveToPose(-5, 36, 270, 1500,{.forwards=false},false);
     clampDown(); // latch MOGO
     stakeMotor.move_absolute(125, 75); // expand wall stake mech.
 
@@ -323,7 +323,7 @@ void blue_K(){ // blue K
 
     /** drive to the ladder for the AWP Ladder touch */
     chassis.turnToHeading(45, 750);
-    chassis.moveToPoint(-24, 3, 1750,{.maxSpeed=80});
+    chassis.moveToPoint(-24, 3, 1750,{.maxSpeed=80},false);
 
     pros::delay(1000);
     stopIntake(); // prevent intake overuse when we finish auton before 30s
@@ -343,7 +343,7 @@ void blue_D(){
     chassis.moveToPoint(32, -32, 2000,{},false);
     stickMotor.move_absolute(125, 127);
 
-    chassis.moveToPose(6, -36, 90, 1500,{.forwards=false},false);
+    chassis.moveToPose(6, -36, 90, 1500,{.forwards=false,.lead=.7},false);
     clampDown();
     stakeMotor.move_absolute(125, 75);
 
